@@ -1,7 +1,6 @@
 import { Resend } from 'resend'
-import { RESEND_API_KEY } from './constants'
 
-const resend = new Resend(RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY)
 const domain = process.env.NEXT_PUBLIC_URL
 export const sendTwoFactorEmail = async (email: string, token: string) => {
 
