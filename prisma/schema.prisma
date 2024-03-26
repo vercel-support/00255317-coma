@@ -1,0 +1,359 @@
+//* This is the Prisma schema file that defines the data model for the application.
+//* IMPORTANTE!!!! Al cambiar el mdoelo de usuario agragando alguna propiedad nueva se debe ejecutar los comandos en consola para que se actualice el modelo en la base de datos: npx prisma generate && npx prisma db push. Luego ademas se debe actaulizar el archivo next-auth.d.ts el type ExtendedUser, para que se actualice el modelo en el cliente de next-auth. Tambien se debe actualizar el archivo auth.ts  los callbacks de next-auth para que se actualice el modelo en el cliente de next-auth.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  CLIENT
+}
+
+//IMPORTANT: This model is used by NextAuth.js to store user accounts
+model User {
+  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
+  email                 String?                @unique
+  password              String?
+  name                  String?
+  emailVerified         DateTime?
+  image                 String?
+  permission            Boolean                @default(false)
+  role                  UserRole               @default(USER)
+  acepTerms             Boolean                @default(false)
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
+  accounts              Account[]
+  employeeId            String?                @db.ObjectId
+  employee              Employee?              @relation("UserToEmployee")
+  notifications         Notification[]
+  creditSales           CreditSale[]           @relation("UserToCreditSale")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId])
+}
+
+model Employee {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String        @unique @db.ObjectId
+  user           User          @relation("UserToEmployee", fields: [userId], references: [id])
+  transactionsId String[]      @db.ObjectId
+  transactions   Transaction[] @relation("EmployeeToTransaction")
+
+  @@index([transactionsId, userId])
+}
+
+model Category {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  productsId  String[]  @db.ObjectId
+  products    Product[] @relation("ProductToCategory")
+
+  @@unique([name])
+  @@index([productsId])
+}
+
+model Product {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  description    String?
+  image          String?
+  price          Float
+  purchasePrice  Float         @default(0)
+  stock          Int
+  supplierId     String        @db.ObjectId
+  supplier       Supplier      @relation("ProductToSupplier", fields: [supplierId], references: [id])
+  category       Category      @relation("ProductToCategory", fields: [categoryId], references: [id])
+  categoryId     String        @db.ObjectId
+  warehouseId    String        @db.ObjectId
+  warehouse      Warehouse     @relation("ProductToWarehouse", fields: [warehouseId], references: [id])
+  transactions   Transaction[] @relation("TransactionToProduct", fields: [transactionsId], references: [id])
+  transactionsId String[]      @db.ObjectId
+
+  @@unique([name, categoryId, supplierId, warehouseId, transactionsId])
+  @@index([supplierId, categoryId, warehouseId, transactionsId])
+}
+
+model Supplier {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String
+  phone          String
+  address        String
+  description    String?
+  productsId     String[]      @db.ObjectId
+  products       Product[]     @relation("ProductToSupplier")
+  transactionsId String[]      @db.ObjectId
+  transactions   Transaction[] @relation("SupplierToTransaction")
+
+  @@unique([name])
+  @@index([productsId, transactionsId])
+}
+
+model Warehouse {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  location    String
+  description String?
+  productsId  String[]  @db.ObjectId
+  products    Product[] @relation("ProductToWarehouse")
+
+  @@unique([name])
+  @@index([productsId])
+}
+
+model Transaction {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  employeeId      String          @db.ObjectId
+  employee        Employee        @relation("EmployeeToTransaction", fields: [employeeId], references: [id])
+  productsId      String[]        @db.ObjectId
+  products        Product[]       @relation("TransactionToProduct", fields: [productsId], references: [id])
+  transactionType TransactionType
+  deliveryStatus  DeliveryStatus  @default(PENDING)
+  statusPayment   StatusPayment   @default(PENDING)
+  totalAmount     Float
+  description     String?
+  createdAt       DateTime        @default(now())
+  cashFlowId      String?         @map("cashFlowId") @db.ObjectId
+  cashFlow        CashFlow?       @relation("TransactionToCashFlow")
+  paymentMethod   PaymentMethod   @default(CASH)
+  supplierId      String?         @db.ObjectId
+  supplier        Supplier?       @relation("SupplierToTransaction", fields: [supplierId], references: [id])
+
+  productSaleTransaction ProductSaleTransaction[] @relation("TransactionToProductSaleTransaction")
+  expenseId              String?                  @db.ObjectId
+  expense                Expense?                 @relation("TransactionToExpense", fields: [expenseId], references: [id])
+  cashReconsiliationId   String?                  @db.ObjectId
+  cashReconsiliation     CashReconsiliation?      @relation("CashReconsiliationToTransaction", fields: [cashReconsiliationId], references: [id])
+  creditSale             CreditSale?              @relation("TransactionToCreditSale")
+
+  @@index([employeeId, productsId, cashFlowId, supplierId, expenseId, cashReconsiliationId])
+}
+
+model ProductSaleTransaction {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  productId     String      @db.ObjectId
+  name          String
+  quantity      Int
+  price         Float
+  totalAmount   Float
+  createdAt     DateTime    @default(now())
+  transactionId String      @db.ObjectId
+  transaction   Transaction @relation("TransactionToProductSaleTransaction", fields: [transactionId], references: [id])
+}
+
+model CashReconsiliation {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  amount       Float         @default(0)
+  description  String?
+  startDay     DateTime      @default(now())
+  endDay       DateTime?
+  startCash    Float
+  endCash      Float?
+  isOpen       Boolean       @default(true)
+  transactions Transaction[] @relation("CashReconsiliationToTransaction")
+}
+
+model CashFlow {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  amount        Float
+  description   String?
+  type          CashFlowType
+  createdAt     DateTime     @default(now())
+  transactionId String?      @map("transactionId") @db.ObjectId
+  transaction   Transaction? @relation("TransactionToCashFlow", fields: [transactionId], references: [id])
+
+  @@unique([transactionId])
+}
+
+model Expense {
+  id               String           @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  description      String?
+  amount           Float
+  recurring        Boolean          @default(false)
+  type             ExpenseType
+  frequency        ExpenseFrequency
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  lastPurchaseDate DateTime?
+  transactions     Transaction[]    @relation("TransactionToExpense")
+}
+
+model Settings {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  currencyType CurrencyType @default(EUR)
+  localeType   LocaleType   @default(es_ES)
+  cashReserves Float        @default(0)
+}
+
+model Notification {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String           @db.ObjectId
+  type      NotificationType
+  title     String
+  message   String
+  link      String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id])
+}
+
+model CreditSale {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  description   String?
+  userId        String      @db.ObjectId
+  user          User        @relation("UserToCreditSale", fields: [userId], references: [id])
+  transactionId String      @unique @db.ObjectId
+  transaction   Transaction @relation("TransactionToCreditSale", fields: [transactionId], references: [id])
+}
+
+enum CurrencyType {
+  EUR
+  ARS
+  USD
+  ILS
+}
+
+enum LocaleType {
+  es_AR
+  en_US
+  es_ES
+  he_IL
+}
+
+enum CashFlowType {
+  SALE
+  PURCHASE
+  OTHER
+  TRANSFER
+  EXPENSE
+}
+
+enum DeliveryStatus {
+  PENDING
+  ON_WAY
+  DELIVERED
+  CANCELED
+  NEVER
+}
+
+enum StatusPayment {
+  PENDING
+  PAID
+  CANCELED
+  NEVER
+}
+
+enum TransactionType {
+  SALE
+  PURCHASE
+  EXPENSE
+}
+
+enum PaymentMethod {
+  CASH
+  CASH_REGISTER
+  CREDIT_CARD
+  DEBIT_CARD
+  TRANSFER
+  CHECK
+  CREDIT
+  MERCADO_PAGO
+  PAY_PAL
+  PAY_ON_CREDIT
+  OTHER
+}
+
+enum ExpenseType {
+  UTILITY
+  TAX
+  EXTRA
+  SALARY
+  RENT
+  OTHER
+}
+
+enum ExpenseFrequency {
+  UNIQUE
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  SEMI_ANNUAL
+  ANNUAL
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  ERROR
+  SUCCESS
+  NEW_ORDER
+  INVENTORY_UPDATE
+  PAYMENT_NOTIFICATION
+  LOW_STOCK_ALERT
+  CLOSING_REMINDER
+  PRICE_UPDATE
+  PAYMENT_ERROR
+  ASSISTANCE_REQUEST
+  PROMOTION_NOTIFICATION
+  ORDER_STATUS_UPDATE
+}

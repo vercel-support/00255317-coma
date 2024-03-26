@@ -107,3 +107,46 @@ export const PrivateRoute: { [key: string]: TRoute } = {
     },
 
 }
+
+export const PublicRoute: { [key: string]: TRoute } = {
+    HOME: {
+        title: "Inicio",
+        path: "/",
+        href: "/",
+    },
+    CONFIRM: {
+        title: "Confirmar",
+        path: "/auth/new-verification?token=${token}",
+        href: "/auth/new-verification",
+    },
+    LOGIN: {
+        title: "Entrar",
+        path: "/auth/login",
+        href: "/auth/login",
+    },
+    ERROR: {
+        title: "Error",
+        path: "/auth/error",
+        href: "/auth/error",
+    },
+    REGISTER: {
+        title: "Registro",
+        path: "/auth/register",
+        href: "/auth/register",
+    },
+    FORGOT_PASSWORD: {
+        title: "Recuperar contraseña",
+        path: "/auth/reset",
+        href: "/auth/reset",
+    },
+    API_AUTH: {
+        title: "API Auth",
+        path: "/api/auth",
+        href: "/api/auth",
+    },
+    RESET_PASSWORD: {
+        title: "Restablecer contraseña",
+        path: "/auth/new-password?token=${token}",
+        href: "/auth/new-password",
+    },
+}

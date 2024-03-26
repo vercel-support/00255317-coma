@@ -43,6 +43,10 @@ html, body, :root{
   }
  
   .dark {
+    --branding: hsl(212, 63%, 51%); /* Equivalente a blue-500 en Tailwind CSS */
+    --branding-light: hsl(212, 63%, 31%); /* Un tono más oscuro para el modo oscuro */
+    --branding-dark: hsl(212, 63%, 21%); /* Un tono aún más oscuro para el modo oscuro */
+   
     --background: hsl(222.2, 84%, 4.9%);
     --foreground: hsl(210, 40%, 98%);
  
