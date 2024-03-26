@@ -2,7 +2,7 @@
 
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { TTransaction, TSupplier } from "@/schemas";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 

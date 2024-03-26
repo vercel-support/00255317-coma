@@ -3,7 +3,7 @@
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/server-auth";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { NewNotificationSchema, TNewNotification } from "@/schemas";
 import { ZodError } from "zod";
 

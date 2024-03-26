@@ -1,6 +1,6 @@
 'use server'
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { TSettings } from "@/schemas";
 import { CurrencyType, LocaleType } from "@prisma/client";
 

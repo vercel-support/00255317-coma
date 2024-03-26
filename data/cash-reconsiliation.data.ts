@@ -3,7 +3,7 @@
 import { authorizeRoles } from "@/actions/user.action";
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { TCashReconsiliation } from "@/schemas";
 import { UserRole } from "@prisma/client";
 import { endOfDay, startOfDay, subDays } from "date-fns";

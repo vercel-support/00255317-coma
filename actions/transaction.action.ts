@@ -1,13 +1,13 @@
 'use server'
 
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { NewCreditSaleSchema, NewTransactionSchema, TNewCreditSale, TNewNotification, TNewTransaction, TTransaction } from "@/schemas";
 import { CashFlowType, DeliveryStatus, NotificationType, PaymentMethod, StatusPayment, UserRole } from "@prisma/client";
 import { authorizeRoles } from "./user.action";
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
 import { cashReserverUpdate } from "./settings.action";
-import { PrivateRoute } from "@/constants/routes.constants";
+import { PrivateRoute } from "@/lib/routes";
 import { revalidatePath } from "next/cache";
 import { createNotification } from "./notification.action";
 import { ZodError } from "zod";

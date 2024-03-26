@@ -1,8 +1,8 @@
 'use server'
 
-import { PrivateRoute } from "@/constants/routes.constants";
+import { PrivateRoute } from "@/lib/routes";
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { NewSupplierSchema, SupplierSchema, TNewSupplier, TSupplier } from "@/schemas";
 import { revalidatePath } from "next/cache";
 import { CustomError } from "@/lib/custom-error.class";

@@ -1,7 +1,7 @@
 'use server'
 import { startOfDay, endOfDay, eachDayOfInterval, format } from 'date-fns'; // Importa las funciones startOfDay y endOfDay
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { CashFlowType, Transaction, TransactionType } from "@prisma/client";
 import { CustomError } from '@/lib/custom-error.class';
 

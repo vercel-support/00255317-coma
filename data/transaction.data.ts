@@ -2,7 +2,7 @@
 import { authorizeRoles } from "@/actions/user.action";
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
-import { DateRange, ResServer } from "@/lib/types";
+import { DateRange, ResServer } from "@/lib/interfaces";
 import { TTransaction } from "@/schemas";
 import { PaymentMethod, StatusPayment, TransactionType, UserRole } from "@prisma/client";
 import { endOfDay, startOfDay } from "date-fns";

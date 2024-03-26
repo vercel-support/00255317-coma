@@ -4,7 +4,7 @@ import { ITEMS_PER_PAGE_NOTIFICATIONS } from "@/components/notifications";
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/server-auth";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { TNotification } from "@/schemas";
 
 export async function getNotifications(offset: number = 0): Promise<ResServer<TNotification[] | null>> {

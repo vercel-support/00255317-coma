@@ -1,6 +1,6 @@
 'use server'
 import { db } from "@/lib/db";
-import { DateRange, ResServer } from "@/lib/types";
+import { DateRange, ResServer } from "@/lib/interfaces";
 import { TProduct } from "@/schemas";
 import { endOfDay, startOfDay } from "date-fns";
 import { TransactionType } from "@prisma/client";

@@ -2,7 +2,7 @@
 
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { TExpense, TTransaction } from "@/schemas";
 import { TransactionType } from "@prisma/client";
 import { endOfDay, startOfDay } from "date-fns";

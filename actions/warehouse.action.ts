@@ -1,9 +1,9 @@
 'use server'
 
-import { PrivateRoute } from "@/constants/routes.constants";
+import { PrivateRoute } from "@/lib/routes";
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
-import { ResServer } from "@/lib/types";
+import { ResServer } from "@/lib/interfaces";
 import { NewWarehouseSchema, TNewWarehouse, TWarehouse, WarehouseSchema } from "@/schemas";
 import { UserRole } from "@prisma/client";
 import { revalidatePath } from "next/cache";
