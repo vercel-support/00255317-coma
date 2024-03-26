@@ -24,7 +24,7 @@ const TotalSalesCard = ({
   return (
     <Card
       className={cn(
-        "flex flex-col items-center p-4 bg-secondary rounded-lg shadow-lg",
+        "flex flex-col items-center p-4 rounded-lg shadow-lg",
         classname ? classname : ""
       )}
     >

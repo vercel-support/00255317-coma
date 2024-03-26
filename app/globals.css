@@ -14,14 +14,14 @@ html, body, :root{
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(222.2, 84%, 4.9%);
 
-    --card: hsl(0, 0%, 100%);
+    --card: hsl(212, 25%, 90%);
     --card-foreground: hsl(222.2, 84%, 4.9%);
  
-    --popover: hsl(0, 0%, 100%);
+    --popover: hsl(212, 25%, 90%);
     --popover-foreground: hsl(222.2, 84%, 4.9%);
  
     --primary: hsl(222.2, 47.4%, 11.2%);
-    --primary-foreground: hsl(210, 40%, 98%);
+    --primary-foreground: hsl(212, 25%, 90%);
  
     --secondary: hsl(210, 40%, 96.1%);
     --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
@@ -33,7 +33,7 @@ html, body, :root{
     --accent-foreground: hsl(222.2, 47.4%, 11.2%);
  
     --destructive: hsl(0, 84.2%, 60.2%);
-    --destructive-foreground: hsl(210, 40%, 98%);
+    --destructive-foreground: hsl(212, 25%, 90%);
 
     --border: hsl(214.3, 31.8%, 91.4%);
     --input: hsl(214.3, 31.8%, 91.4%);
@@ -48,28 +48,28 @@ html, body, :root{
     --branding-dark: hsl(212, 63%, 21%); /* Un tono aún más oscuro para el modo oscuro */
    
     --background: hsl(222.2, 84%, 4.9%);
-    --foreground: hsl(210, 40%, 98%);
+    --foreground: hsl(212, 25%, 90%);
  
-    --card: hsl(222.2, 84%, 4.9%);
-    --card-foreground: hsl(210, 40%, 98%);
+    --card: hsl(217.2, 32.6%, 17.5%);
+    --card-foreground: hsl(212, 25%, 90%);
  
     --popover: hsl(222.2, 84%, 4.9%);
-    --popover-foreground: hsl(210, 40%, 98%);
+    --popover-foreground: hsl(212, 25%, 90%);
  
-    --primary: hsl(210, 40%, 98%);
+    --primary: hsl(212, 25%, 90%);
     --primary-foreground: hsl(222.2, 47.4%, 11.2%);
  
     --secondary: hsl(217.2, 32.6%, 17.5%);
-    --secondary-foreground: hsl(210, 40%, 98%);
+    --secondary-foreground: hsl(212, 25%, 90%);
  
     --muted: hsl(217.2, 32.6%, 17.5%);
     --muted-foreground: hsl(215, 20.2%, 65.1%);
  
     --accent: hsl(217.2, 32.6%, 17.5%);
-    --accent-foreground: hsl(210, 40%, 98%);
+    --accent-foreground: hsl(212, 25%, 90%);
  
     --destructive: hsl(0, 62.8%, 30.6%);
-    --destructive-foreground: hsl(210, 40%, 98%);
+    --destructive-foreground: hsl(212, 25%, 90%);
  
     --border: hsl(217.2, 32.6%, 17.5%);
     --input: hsl(217.2, 32.6%, 17.5%);

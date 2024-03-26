@@ -11,7 +11,7 @@ const LeftSideBar = () => {
   const pathname = usePathname();
 
   return (
-    <aside className="h-screen left-0 top-0 sticky p-8 pt-2 flex flex-col gap-4 bg-brandingLight shadow-lg max-md:hidden overflow-auto dark:bg-secondary">
+    <aside className="h-screen left-0 top-0 sticky p-8 pt-2 flex flex-col gap-4 bg-card shadow-lg max-md:hidden overflow-auto">
       <div className="w-full flex items-center justify-center bg-branding rounded-md shadow-sm p-2">
         <Image
           src="/logo-gesapp-white.svg"
@@ -31,7 +31,7 @@ const LeftSideBar = () => {
                 "flex",
                 "gap-4",
                 "text-md font-bold",
-                "hover:text-brandingDark",
+                "hover:text-brandingDark  dark:hover:text-brandingLight",
                 pathname === link.path ? "text-branding" : "text-primary/70"
               )}
             >

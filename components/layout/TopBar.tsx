@@ -11,14 +11,13 @@ import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { UserButton } from "@/components/auth/user-button";
 import { ModeToggle } from "@/components/custom ui/toggle-mode";
 
 const TopBar = () => {
   const pathname = usePathname();
   return (
-    <div className="sticky top-0 z-20 w-full flex justify-between px-8 py-2 items-center bg-brandingLight shadow-xl md:hidden dark:bg-secondary">
+    <div className="sticky top-0 z-20 w-full flex justify-between px-8 py-2 items-center bg-card shadow-xl md:hidden">
       <div className="w-[50%] flex items-center justify-center bg-branding rounded-md shadow-sm">
         <Image
           src="/logo-gesapp-white.svg"
@@ -43,7 +42,7 @@ const TopBar = () => {
                     "flex",
                     "gap-4",
                     "text-xl font-bold",
-                    "hover:text-brandingDark",
+                    "hover:text-brandingDark dark:hover:text-brandingLight",
                     pathname === link.path
                       ? "text-branding"
                       : "text-neutral-500"
