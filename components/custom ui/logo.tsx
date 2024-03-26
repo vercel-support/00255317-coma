@@ -11,7 +11,7 @@ export const Logo = ({ flexCol = false }: LogoProps) => {
     <Link href={PrivateRoute.TPV.href}>
       <div
         className={cn(
-          "text-2xl text-blue-500 font-bold uppercase flex flex-col items-center justify-center",
+          "text-2xl text-branding font-bold uppercase flex flex-col items-center justify-center",
           flexCol ? "flex-col" : "flex-row gap-x-2"
         )}
       >
@@ -25,11 +25,11 @@ export const Logo = ({ flexCol = false }: LogoProps) => {
         </span>
         <p
           className={cn(
-            "hidden md:block font-bold text-blue-500 ",
-            "md:text-3xl"
+            "hidden md:block font-bold text-branding ",
+            "md:text-3xl uppercase"
           )}
         >
-          Kiosco
+          Gesapp
         </p>
       </div>
     </Link>
