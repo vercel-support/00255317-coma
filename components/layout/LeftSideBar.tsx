@@ -31,7 +31,7 @@ const LeftSideBar = () => {
                 "flex",
                 "gap-4",
                 "text-md font-bold",
-                "hover:text-destructive",
+                "hover:text-brandingDark",
                 pathname === link.path ? "text-branding" : "text-primary/70"
               )}
             >
