@@ -42,17 +42,23 @@ export const AlertModal: React.FC<AlertModalI> = ({
       description={description}
     >
       {children}
-      <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+      <div className="pt-6 space-x-2 flex max-md:flex-col items-center justify-end w-full gap-4">
         {buttons && (
           <>
             {" "}
-            <Button variant="outline" onClick={onClose} disabled={loading}>
+            <Button
+              variant="outline"
+              onClick={onClose}
+              disabled={loading}
+              className="max-md:w-full border-gray-500"
+            >
               Cancelar
             </Button>
             <Button
               variant={"destructive"}
               onClick={onConfirm}
               disabled={loading}
+              className="max-md:w-full"
             >
               {labelActionButton || "Eliminar"}
             </Button>

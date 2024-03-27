@@ -3,14 +3,13 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 import { getUserById } from "@/data/user.data"
 import { db } from "@/lib/db"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { UserRole } from "@prisma/client"
+import { User, UserRole } from "@prisma/client"
 import NextAuth from "next-auth"
 
 import { getAccountByUserId } from "./data/account"
 import { TCreditSale, TEmployee, TNotification } from "./schemas"
 import { PublicRoute } from "./lib/routes"
 
-//TODO: parece que el error de peticiones en bucle esta en como de algun modmo authv5 esta cargando session. NO es algos eguro solo para revisar y comprobar que no sea eso
 export const {
     handlers: { GET, POST },
     auth,
@@ -40,7 +39,7 @@ export const {
             const existingUser = await getUserById(user.id)
             if (!existingUser?.emailVerified) return false
             if (!existingUser?.permission) return false
-            if (existingUser.role !== UserRole.CLIENT && !existingUser?.employeeId) return false
+            if (existingUser?.role !== UserRole.ADMIN) return false
 
             if (existingUser.isTwoFactorEnabled) {
                 const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)

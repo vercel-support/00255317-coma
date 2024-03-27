@@ -57,7 +57,6 @@ export const RegisterForm = () => {
         headerLabel="Crea una cuenta"
         backButtonLabel="Iniciar sesión"
         backButtonHref="/auth/login"
-        showSocial
       >
         <Form {...form}>
           <form

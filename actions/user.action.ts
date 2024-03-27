@@ -192,7 +192,7 @@ export async function ChangedRole({ id, role }: { id: string, role: UserRole }):
 }
 
 
-export async function DeleteEmployee(id: string): Promise<ResServer> {
+export async function DeleteUser(id: string): Promise<ResServer> {
     try {
         if (!id) throw new CustomError("No se ha proporcionado un ID de usuario.", 400);
         const authorization = await authorizeRoles([UserRole.ADMIN]);
@@ -238,7 +238,7 @@ export async function DeleteEmployee(id: string): Promise<ResServer> {
             code: 200
         };
     } catch (error) {
-        console.error('[EMPLOYEE_ACTION_DELETE_EMPLOYEE]', { error });
+        console.error('[USER_ACTION_DELETE_USER]', { error });
         if (error instanceof CustomError) {
             return { message: error.message, error: true, code: error.code };
         }

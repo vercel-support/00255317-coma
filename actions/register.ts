@@ -20,7 +20,6 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         if (!acepTerms) {
             return { error: "Debe aceptar los términos y condiciones" }
         }
-        console.log('aceptTerms', { acepTerms });
         // Verificar si el usuario ya existe
         const existingUser = await getUserByEmail(email);
         if (existingUser) {

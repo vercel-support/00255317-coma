@@ -71,7 +71,7 @@ html, body, :root{
     --destructive: hsl(0, 62.8%, 30.6%);
     --destructive-foreground: hsl(212, 25%, 90%);
  
-    --border: hsl(217.2, 32.6%, 17.5%);
+    --border: hsl(212.7, 26.8%, 83.9%);
     --input: hsl(217.2, 32.6%, 17.5%);
     --ring: hsl(212.7, 26.8%, 83.9%);
   }
@@ -84,4 +84,54 @@ html, body, :root{
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.badge{
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .7rem !important;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  border-radius: .2rem;
+  margin-top: .9rem;
+  margin-bottom: .9rem;
+  cursor: default;
+  border: none;
+  line-height: .7rem;
+}
+
+.user {
+  background-color: #4d8b31;
+}
+
+.admin {
+  background-color: #942986;
+}
+ .client {
+  background-color: #1072f1;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 0.4rem;
+  /* z-index: 99; */
+}
+
+/* Track */
+
+.customScroll:-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: #1072f1;
+  border-radius: 1rem;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background: #75abf1;
 }
