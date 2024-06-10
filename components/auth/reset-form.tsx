@@ -61,7 +61,7 @@ export const ResetForm = () => {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="ejemplo@email.com"
+                      placeholder="tu_email@email.com"
                       type="email"
                     />
                   </FormControl>
@@ -73,7 +73,7 @@ export const ResetForm = () => {
           <FormError message={error} />
           <Formsuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            Enivar email
+            Enviar email
           </Button>
         </form>
       </Form>

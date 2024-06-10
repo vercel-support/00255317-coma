@@ -19,8 +19,8 @@ export const Logo = ({ flexCol = false }: LogoProps) => {
           <Image
             src="/LOGO_HORIZONTAL_TAGLINE_945PX.svg"
             alt="COMA"
-            width={250}
-            height={250}
+            width={270}
+            height={270}
           />
         </span>
       </div>

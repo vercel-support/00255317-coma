@@ -74,7 +74,7 @@ export const RegisterForm = () => {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="Jhon Doe"
+                        placeholder="Tu nombre completo."
                       />
                     </FormControl>
                     <FormMessage />
@@ -91,7 +91,7 @@ export const RegisterForm = () => {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="ejemplo@email.com"
+                        placeholder="tu_email@email.com"
                         type="email"
                       />
                     </FormControl>
@@ -124,7 +124,7 @@ export const RegisterForm = () => {
               control={form.control}
               name="acepTerms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow bg-white dark:bg-background">
                   <FormControl>
                     <Checkbox
                       checked={field.value}

@@ -8,14 +8,15 @@ import { SessionProvider } from "next-auth/react";
 import { Lato } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
-const nunito = Lato({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["400", "700"], // Añade los pesos que necesitas
+  weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Gesapp",
-  description: "TPV + Gestor de negocio para pequeñas y medianas empresas B2C.",
+  title: "C.O.M.A",
+  description: "Centro de Orientación Matrimonial Asistida",
   manifest: "/manifest.json",
 };
 
@@ -34,7 +35,7 @@ export default async function RootLayout({
           type="image/<generated>"
           sizes="<generated>"
         />
-        <body className={nunito.className}>
+        <body className={lato.className}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

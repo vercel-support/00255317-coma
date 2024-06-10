@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
   "version": "0.0.3",
-  "theme_color": "#3B82F6",
-  "background_color": "#112443",
+  "theme_color": "#1d428a",
+  "background_color": "#e06287",
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
-  "name": "Gesapp",
-  "short_name": "Gesapp",
-  "description": "TPV   Gestor de negocio para peque\u00f1as y medianas empresas B2B.",
+  "name": "C.O.M.A",
+  "short_name": "C.O.M.A",
+  "description": "Centro de Orientación Matrimonial Asistida",
   "icons": [
     {
       "src": "/icon-192x192.png",
