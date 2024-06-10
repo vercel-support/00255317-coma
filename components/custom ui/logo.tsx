@@ -17,20 +17,12 @@ export const Logo = ({ flexCol = false }: LogoProps) => {
       >
         <span className="relative">
           <Image
-            src="/logo-gesapp-blue.svg"
-            alt="Kiosco"
-            width={50}
-            height={50}
+            src="/LOGO_HORIZONTAL_TAGLINE_945PX.svg"
+            alt="COMA"
+            width={250}
+            height={250}
           />
         </span>
-        <p
-          className={cn(
-            "hidden md:block font-bold text-branding ",
-            "md:text-3xl uppercase"
-          )}
-        >
-          Gesapp
-        </p>
       </div>
     </Link>
   );

@@ -20,8 +20,8 @@ const config = {
     extend: {
       colors: {
         branding: "var(--branding)",
-        brandingLight: "var(--branding-light)",
-        brandingDark: "var(--branding-dark)",
+        brandingSecond: "var(--branding-second)",
+        brandingThird: "var(--branding-third)",
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",

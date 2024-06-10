@@ -42,7 +42,7 @@ const TopBar = () => {
                     "flex",
                     "gap-4",
                     "text-xl font-bold",
-                    "hover:text-brandingDark dark:hover:text-brandingLight",
+                    "hover:text-brandingThird dark:hover:text-brandingSecond",
                     pathname === link.path
                       ? "text-branding"
                       : "text-neutral-500"

@@ -5,10 +5,13 @@ import ScrollToTop from "@/providers/scroll-to-top.provider";
 import { ThemeProvider } from "@/providers/theme.provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Nunito } from "next/font/google";
+import { Lato } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
-const nunito = Nunito({ subsets: ["latin"] });
+const nunito = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Añade los pesos que necesitas
+});
 
 export const metadata: Metadata = {
   title: "Gesapp",
@@ -27,7 +30,7 @@ export default async function RootLayout({
       <html lang="es">
         <link
           rel="icon"
-          href="/favicon.png"
+          href="/favicon.svg"
           type="image/<generated>"
           sizes="<generated>"
         />

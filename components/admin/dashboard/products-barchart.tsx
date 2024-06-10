@@ -71,7 +71,7 @@ export const ProductsSoldChart = ({ data }: props) => {
 
         <div className="w-full flex items-center justify-end gap-x-3">
           <h2
-            className="bg-branding text-white rounded-md p-2 hover:bg-brandingDark cursor-pointer"
+            className="bg-branding text-white rounded-md p-2 hover:bg-brandingThird cursor-pointer"
             onClick={handleGetToday}
           >
             Hoy
@@ -117,7 +117,7 @@ export const ProductsSoldChart = ({ data }: props) => {
                     />
                   </div>
                   <button
-                    className="bg-branding hover:bg-brandingDark text-white font-bold py-2 px-4 rounded"
+                    className="bg-branding hover:bg-brandingThird text-white font-bold py-2 px-4 rounded"
                     onClick={handleGetTotal}
                     disabled={loading}
                   >

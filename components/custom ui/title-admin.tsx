@@ -33,7 +33,7 @@ export const TitleAdmin: React.FC<TitleAdminInterface> = ({
       )}
     >
       {back && (
-        <ButtonBack className="hover:text-brandingDark absolute left-0 md:-left-12">
+        <ButtonBack className="hover:text-brandingThird absolute left-0 md:-left-12">
           <FaChevronLeft />
         </ButtonBack>
       )}

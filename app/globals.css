@@ -7,9 +7,9 @@ html, body, :root{
 }
 @layer base {
   :root {
-    --branding:hsl(212, 63%, 51%); /* Equivalente a blue-500 en Tailwind CSS */
-    --branding-light: hsl(212, 25%, 90%); /* Equivalente a blue-200 en Tailwind CSS */
-    --branding-dark: hsl(212, 63%, 31%); /* Equivalente a blue-700 en Tailwind CSS */
+    --branding:hsl(220, 65%, 46%); 
+    --branding-second: hsl(342, 67%, 63%); 
+    --branding-third: hsl(12, 100%, 63%); 
 
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(222.2, 84%, 4.9%);
@@ -43,10 +43,10 @@ html, body, :root{
   }
  
   .dark {
-    --branding: hsl(212, 63%, 51%); /* Equivalente a blue-500 en Tailwind CSS */
-    --branding-light: hsl(212, 63%, 31%); /* Un tono más oscuro para el modo oscuro */
-    --branding-dark: hsl(212, 63%, 21%); /* Un tono aún más oscuro para el modo oscuro */
-   
+    --branding:hsl(220, 65%, 46%); 
+    --branding-second: hsl(342, 67%, 63%); 
+    --branding-third: hsl(12, 100%, 63%); 
+
     --background: hsl(222.2, 84%, 4.9%);
     --foreground: hsl(212, 25%, 90%);
  

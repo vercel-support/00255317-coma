@@ -161,7 +161,7 @@ export const CardsDashboard = ({
       <div className="w-full flex items-center justify-end mb-4">
         <div className="w-full flex items-center justify-end gap-x-3">
           <h2
-            className="bg-branding text-white rounded-md p-2 hover:bg-brandingDark cursor-pointer"
+            className="bg-branding text-white rounded-md p-2 hover:bg-brandingThird cursor-pointer"
             onClick={handleGetToday}
           >
             Hoy
