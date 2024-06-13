@@ -38,6 +38,15 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
                 name,
                 acepTerms,
                 emailVerified: undefined,
+                lastName: '',
+                address: '',
+                postalCode: '',
+                province: '',
+                phone: '',
+                country: '',
+                city: '',
+
+
             }
         })
 

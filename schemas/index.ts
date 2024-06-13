@@ -1,31 +1,85 @@
-import { CashFlow, CashFlowType, PaymentMethod, Transaction, TransactionType, UserRole, Category, Supplier, Product, Warehouse, ProductSaleTransaction, DeliveryStatus, StatusPayment, CashReconsiliation, Expense, ExpenseType, ExpenseFrequency, Settings, CurrencyType, LocaleType, Notification, NotificationType, CreditSale } from '@prisma/client';
+import { Appointment, CurrencyType, Employee, LocaleType, SalesMetrics, Service, ServiceTransaction, Settings, SettingsAccount, User, UserRole, NotificationType, Notification } from '@prisma/client';
 import * as z from 'zod';
 //IMPORTANT: When you change a schema, you must modify the corresponding model in: @/models/[model_name_here]
+const PlaceholderSettingsAccountSchema: z.Schema<SettingsAccount> = z.lazy(() => SettingsAccountSchema);
+const PlaceholderServiceTransactionSchema: z.Schema<ServiceTransaction> = z.lazy(() => ServiceTransactionSchema);
+const PlaceholderServiceSchema: z.Schema<Service> = z.lazy(() => ServiceSchema);
+const PlaceholderAppointmentSchema: z.Schema<Appointment> = z.lazy(() => AppointmentSchema);
+const PlaceholderEmployeeSchema: z.Schema<Employee> = z.lazy(() => EmployeeSchema);
+const PlaceholderNotificationSchema: z.Schema<Notification> = z.lazy(() => NotificationSchema)
+const PlaceholderSettingsSchema: z.Schema<Settings> = z.lazy(() => SettingsSchema);
+const PlaceholderSalesMetricsSchema: z.Schema<SalesMetrics> = z.lazy(() => SalesMetricsSchema)
 
-const PlaceholderNotificationSchema: z.Schema<Notification> = z.lazy(() => NotificationSchema);
-const PlaceholderCreditSaleSchema: z.Schema<CreditSale> = z.lazy(() => CreditSaleSchema);
+
 //** Auth START */
 export const UserSchema = z.object({
-    email: z.string().email({
-        message: 'Por favor ingresa un correo válido',
-    }),
-    password: z.string().min(6, {
-        message: 'Mínimo 6 caracteres',
-    }).optional(),
-    name: z.string().min(1, {
-        message: 'Por favor ingresa un nombre',
-    }),
-    emailVerified: z.date().optional(),
-    image: z.string().optional(),
-    acepTerms: z.boolean().optional(),
+    id: z.string(),
+    email: z.string(),
+    password: z.string(),
+    name: z.string(),
+    lastName: z.string(),
+    phone: z.string(),
+    address: z.string(),
+    city: z.string(),
+    province: z.string(),
+    country: z.string(),
+    postalCode: z.string(),
+    emailVerified: z.date(),
+    image: z.string().nullable(),
     permission: z.boolean(),
+    role: z.nativeEnum(UserRole),
+    acepTerms: z.boolean(),
+    isTwoFactorEnabled: z.boolean(),
+    //twoFactorConfirmation: z.any().nullable(),
+    // accounts: z.any(),
+    employeeId: z.string().nullable(),
+    employee: PlaceholderEmployeeSchema.optional(),
     notifications: z.array(PlaceholderNotificationSchema).optional(),
-    creditSales: z.array(PlaceholderCreditSaleSchema).optional(),
-    id: z.string().optional(),
-    role: z.nativeEnum(UserRole).optional(),
+    appointments: z.array(PlaceholderAppointmentSchema).optional(),
+
+    serviceTransactions: z.array(PlaceholderServiceTransactionSchema).optional(),
+    settings: z.array(PlaceholderSettingsAccountSchema).optional()
+
 });
 
 export type TUser = z.infer<typeof UserSchema>;
+
+export const SettingsUserSchema = z.object({
+    name: z.optional(z.string()),
+    email: z.optional(z.string().email({
+        message: 'Por favor ingresa un correo válido',
+    })),
+    image: z.optional(z.string()),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+
+    password: z.optional(z.string().min(6, {
+        message: 'Mínimo 6 caracteres',
+    })),
+    newPassword: z.optional(z.string().min(6, {
+        message: 'Mínimo 6 caracteres',
+    })),
+})
+    .refine((data) => {
+        if (data.password && !data.newPassword) {
+            return false
+        }
+        return true
+    }, {
+        message: 'La nueva contraseña es requerida',
+        path: ['newPassword']
+    })
+    .refine((data) => {
+        if (data.newPassword && !data.password) {
+            return false
+        }
+        return true
+    }, {
+        message: 'La contraseña actual es requerida',
+        path: ['password']
+    });
+
+export type TSettingsUser = z.infer<typeof SettingsUserSchema>
+
 
 export const LoginSchema = UserSchema.omit({
     name: true,
@@ -87,285 +141,146 @@ export type TAccount = z.infer<typeof AccountSchema>;
 
 //** Auth END */
 
+
+
 //** REST MODELS */
 
-const PlaceholderCategorySchema: z.Schema<Category> = z.lazy(() => CategorySchema);
-const PlaceholderWarehouseSchema: z.Schema<Warehouse> = z.lazy(() => WarehouseSchema);
-const PlaceholderProductSchema: z.Schema<Product> = z.lazy(() => ProductSchema);
-const PlaceholderCashFlowSchema: z.Schema<CashFlow> = z.lazy(() => CashFlowSchema);
-const PlaceholderSupplierSchema: z.Schema<Supplier> = z.lazy(() => SupplierSchema);
-const PlaceholderProductSaleTransactionSchema: z.Schema<ProductSaleTransaction> = z.lazy(() => ProductSaleTransactionSchema);
-const PlaceholderCashReconsiliationSchema: z.Schema<CashReconsiliation> = z.lazy(() => CashReconsiliationSchema);
-const placeholderExpenseSchema: z.Schema<Expense> = z.lazy(() => ExpenseSchema);
-const PlaceholderSaleTransactionSchema: z.Schema<Transaction> = z.lazy(() => TransactionSchema);
+//** SettingsAccount */
+export const SettingsAccountSchema = z.object({
+    id: z.string(),
 
-export const SettingsUserSchema = z.object({
-    name: z.optional(z.string()),
-    email: z.optional(z.string().email({
-        message: 'Por favor ingresa un correo válido',
-    })),
-    image: z.optional(z.string()),
-    isTwoFactorEnabled: z.optional(z.boolean()),
+    firstSetup: z.boolean(),
 
-    password: z.optional(z.string().min(6, {
-        message: 'Mínimo 6 caracteres',
-    })),
-    newPassword: z.optional(z.string().min(6, {
-        message: 'Mínimo 6 caracteres',
-    })),
+    sector: z.string(),
+    localName: z.string(),
+    localAddress: z.string(),
+    localPhone: z.string(),
+    localEmail: z.string(),
+    localPostalCode: z.string(),
+    localCity: z.string(),
+    localProvince: z.string(),
+    localCountry: z.string(),
+    localeType: z.nativeEnum(LocaleType),
+    cash_register: z.boolean(),
+    credit_card: z.boolean(),
+    debit_card: z.boolean(),
+    mercado_pago: z.boolean(),
+    pay_pal: z.boolean(),
+    currencyType: z.nativeEnum(CurrencyType),
+    cashReserves: z.coerce.number().min(0.01, "El monto es requerido"),
+
+    // notifications
+    notificationsExpense: z.boolean(),
+    notificationsCreditsSale: z.boolean(),
+    // relations
+    userId: z.string().nullable(),
+    user: UserSchema.optional(),
+    serviceTransactionId: z.string().nullable(),
+    serviceTransaction: PlaceholderServiceTransactionSchema.optional(),
 })
-    .refine((data) => {
-        if (data.password && !data.newPassword) {
-            return false
-        }
-        return true
-    }, {
-        message: 'La nueva contraseña es requerida',
-        path: ['newPassword']
-    })
-    .refine((data) => {
-        if (data.newPassword && !data.password) {
-            return false
-        }
-        return true
-    }, {
-        message: 'La contraseña actual es requerida',
-        path: ['password']
-    });
+export type TSettingsAccount = z.infer<typeof SettingsAccountSchema>
+export const NewSettingsAccountSchema = SettingsAccountSchema.omit({
+    id: true
+})
+export type TNewSettingsAccount = z.infer<typeof NewSettingsAccountSchema>
 
-export type TSettingsUser = z.infer<typeof SettingsUserSchema>
-
-
-//** SaleTransaction */
-export const TransactionSchema = z.object({
+//** ServiceTransaction */
+export const ServiceTransactionSchema = z.object({
     id: z.string(),
+    date: z.date(),
+    expirationDate: z.date(),
+    history: z.array(z.string()),
+    aceptTerms: z.boolean(),
+    paymentMethod: z.string(),
+    paymentStatus: z.string(),
+    status: z.boolean(),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+    serviceId: z.string().nullable(),
+    service: PlaceholderServiceSchema.optional(),
+    setings: z.array(PlaceholderSettingsSchema),
+    userId: z.string().nullable(),
+    user: UserSchema.optional()
+
+
+})
+export type TServiceTransaction = z.infer<typeof ServiceTransactionSchema>
+export const NewServiceTransactionSchema = ServiceTransactionSchema.omit({
+    id: true
+})
+export type TNewServiceTransaction = z.infer<typeof NewServiceTransactionSchema>
+
+
+//** Service */
+export const ServiceSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    price: z.coerce.number().min(0.01, "El precio es requerido"),
+    priceIdStripe: z.string(),
+    currencyType: z.nativeEnum(CurrencyType),
+    localeType: z.nativeEnum(LocaleType),
+    duration: z.coerce.number().min(1, "El tiempo en minutos es requerido."),
+    online: z.boolean(),
+    discount: z.coerce.number().min(0.01).nullable(),
+    percentageCommission: z.coerce.number().min(0).nullable(),
+    commission: z.coerce.number().min(0.01).nullable(),
+    appointments: z.array(PlaceholderAppointmentSchema).optional(),
+    serviceTransaction: z.array(PlaceholderServiceTransactionSchema).optional()
+})
+export type TService = z.infer<typeof ServiceSchema>
+export const NewServiceSchema = ServiceSchema.omit({
+    id: true
+})
+export type TNewService = z.infer<typeof NewServiceSchema>
+
+//** Appointment */
+export const AppointmentSchema = z.object({
+    id: z.string(),
+    date: z.date(),
+    status: z.string(),
+    userId: z.string(),
     employeeId: z.string(),
-    employee: z.any(),
-    productsId: z.array(z.string()),
-    products: z.array(PlaceholderProductSchema).optional(),
-    transactionType: z.nativeEnum(TransactionType),
-    totalAmount: z.number().min(1, {
-        message: 'El monto total es requerido',
-    }),
-    description: z.string().nullable(),
-    createdAt: z.date(),
-    cashFlowId: z.string().nullable(),
-    cashFlow: PlaceholderCashFlowSchema.optional(),
-    paymentMethod: z.nativeEnum(PaymentMethod),
-    deliveryStatus: z.nativeEnum(DeliveryStatus),
-    statusPayment: z.nativeEnum(StatusPayment),
-    supplierId: z.string().nullable(),
-    supplier: PlaceholderSupplierSchema.optional(),
-    productSaleTransaction: z.array(PlaceholderProductSaleTransactionSchema).optional(),
-    cashReconsiliationId: z.string().nullable(),
-    cashReconsiliation: PlaceholderCashReconsiliationSchema.optional(),
-    expenseId: z.string().nullable(),
-    expense: placeholderExpenseSchema.optional(),
-    creditSale: PlaceholderCreditSaleSchema.optional(),
-});
-export type TTransaction = z.infer<typeof TransactionSchema>;
-export const NewTransactionSchema = TransactionSchema.omit({
-    id: true,
-    employee: true,
-    products: true,
-    cashFlow: true,
-    cashFlowId: true,
-});
-export type TNewTransaction = z.infer<typeof NewTransactionSchema>;
-
-//** CashFlow */
-export const CashFlowSchema = z.object({
-    id: z.string(),
-    amount: z.number(),
-    description: z.string().nullable(),
-    type: z.nativeEnum(CashFlowType),
-    createdAt: z.date(),
-    transactionId: z.string(),
-    transaction: TransactionSchema.optional(),
-});
-export type TCashFlow = z.infer<typeof CashFlowSchema>;
-export const NewCashFlowSchema = CashFlowSchema.omit({
-    id: true,
-    transaction: true,
-});
-export type TNewCashFlow = z.infer<typeof NewCashFlowSchema>;
+    serviceId: z.string(),
+    user: UserSchema.optional(), // Este campo es opcional ya que en el modelo Prisma no es obligatorio para la relación
+    employee: PlaceholderEmployeeSchema.optional(), // Igual que arriba
+    service: ServiceSchema.optional() // Igual que arriba
+})
+export type TAppointment = z.infer<typeof AppointmentSchema>
+export const NewAppointmentSchema = AppointmentSchema.omit({
+    id: true
+})
+export type TNewAppointment = z.infer<typeof NewAppointmentSchema>
 
 //** Employee */
 export const EmployeeSchema = z.object({
     id: z.string(),
-    name: z.optional(z.string()),
-    email: z.optional(z.string().email({
-        message: 'Por favor ingresa un correo válido',
-    })),
-    image: z.optional(z.string()),
-    isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.nativeEnum(UserRole),
-    permission: z.boolean(),
-    transactions: z.array(TransactionSchema).optional(),
+    position: z.string(),
+    userId: z.string(),
+    user: UserSchema,
+    appointments: z.array(AppointmentSchema).optional(),
 })
 export type TEmployee = z.infer<typeof EmployeeSchema>
-export const ChangePermissionSchema = z.object({
-    userId: z.string(),
-    permission: z.boolean(),
-})
-export type TChangePermission = z.infer<typeof ChangePermissionSchema>
 
-export const ChangeRoleSchema = z.object({
-    userId: z.string(),
-    role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.CLIENT]),
-})
-export type TChangeRole = z.infer<typeof ChangeRoleSchema>
-
-//* Category */
-export const CategorySchema = z.object({
+//** Notification */
+export const NotificationSchema = z.object({
     id: z.string(),
-    name: z.string().min(1, {
-        message: 'Por favor ingresa un nombre para la categoría',
-    }),
-    description: z.string().nullable(),
-    productsId: z.array(z.string()),
-    products: z.array(PlaceholderProductSchema).optional(),
-});
-export type TCategory = z.infer<typeof CategorySchema>;
-export const NewCategorySchema = CategorySchema.omit({
-    id: true,
-    productsId: true,
-});
-export type TNewCategory = z.infer<typeof NewCategorySchema>;
-
-
-//** Supplier */
-export const SupplierSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    email: z.string(),
-    phone: z.string(),
-    address: z.string(),
-    description: z.string().nullable(),
-    productsId: z.array(z.string()),
-    products: z.array(PlaceholderProductSchema).optional(),
-    transactionsId: z.array(z.string()),
-    transactions: z.array(PlaceholderSaleTransactionSchema).optional(),
-
-});
-export type TSupplier = z.infer<typeof SupplierSchema>;
-export const NewSupplierSchema = SupplierSchema.omit({
-    id: true,
-    productsId: true,
-    products: true,
-    transactions: true,
-    transactionsId: true,
-});
-export type TNewSupplier = z.infer<typeof NewSupplierSchema>;
-
-//** Product */
-export const ProductSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string().nullable(),
-    image: z.string().nullable(),
-    purchasePrice: z.coerce.number().min(0.01, "El precio del producto es requerido"),
-    price: z.coerce.number().min(0.01, "El precio del producto es requerido"),
-    stock: z.coerce.number().min(0, "El stock del producto es requerido"),
-    supplierId: z.string(),
-    categoryId: z.string(),
-    warehouseId: z.string(),
-    transactionsId: z.array(z.string()),
-    transactions: z.array(TransactionSchema).optional(),
-    supplier: PlaceholderSupplierSchema.optional(),
-    category: PlaceholderCategorySchema.optional(),
-    warehouse: PlaceholderWarehouseSchema.optional(),
-});
-export type TProduct = z.infer<typeof ProductSchema>;
-export const NewProductSchema = ProductSchema.omit({
-    id: true,
-    transactionsId: true,
-});
-export type TNewProduct = z.infer<typeof NewProductSchema>;
-
-//** Warehouse */
-export const WarehouseSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    location: z.string(),
-    description: z.string().nullable(),
-    productsId: z.array(z.string()),
-    products: z.array(PlaceholderProductSchema).optional(),
-});
-export type TWarehouse = z.infer<typeof WarehouseSchema>;
-export const NewWarehouseSchema = WarehouseSchema.omit({
-    id: true,
-    productsId: true,
-    products: true,
-});
-export type TNewWarehouse = z.infer<typeof NewWarehouseSchema>;
-
-//** ProductSaleTransaction */
-export const ProductSaleTransactionSchema = z.object({
-    id: z.string(),
-    productId: z.string(),
-    name: z.string(),
-    quantity: z.number(),
-    price: z.number(),
-    totalAmount: z.number(),
+    notificationType: z.nativeEnum(NotificationType),
+    title: z.string(),
+    message: z.string(),
+    link: z.string(),
+    userId: z.string().nullable(),
+    user: UserSchema.nullable(),
+    read: z.boolean(),
     createdAt: z.date(),
-    transactionId: z.string(),
-    transaction: TransactionSchema.optional(),
 });
-export type TProductSaleTransaction = z.infer<typeof ProductSaleTransactionSchema>;
-export const NewProductSaleTransactionSchema = ProductSaleTransactionSchema.omit({
+export type TNotification = z.infer<typeof NotificationSchema>;
+export const NewNotificationSchema = NotificationSchema.omit({
     id: true,
-    transaction: true,
-    createdAt: true,
-    transactionId: true,
+    user: true,
+    userId: true,
 });
-export type TNewProductSaleTransaction = z.infer<typeof NewProductSaleTransactionSchema>;
-
-//** CashReconsiliation */
-export const CashReconsiliationSchema = z.object({
-    id: z.string(),
-    amount: z.number(),
-    description: z.string().nullable(),
-    startDay: z.date(),
-    endDay: z.date().nullable(),
-    startCash: z.number(),
-    endCash: z.number().nullable(),
-    isOpen: z.boolean(),
-    transactions: z.array(TransactionSchema).optional(),
-});
-export type TCashReconsiliation = z.infer<typeof CashReconsiliationSchema>;
-export const NewCashReconsiliationSchema = CashReconsiliationSchema.omit({
-    id: true,
-    transactions: true,
-});
-export type TNewCashReconsiliation = z.infer<typeof NewCashReconsiliationSchema>;
-
-//** Expense */
-export const ExpenseSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string().nullable(),
-    amount: z.number().min(0.01, { 'message': 'El monto es requerido' }),
-    recurring: z.boolean(),
-    type: z.nativeEnum(ExpenseType),
-    frequency: z.nativeEnum(ExpenseFrequency),
-    createdAt: z.date(),
-    updatedAt: z.date(),
-    lastPurchaseDate: z.date().nullable(),
-    transactions: z.array(TransactionSchema).optional(),
-});
-export type TExpense = z.infer<typeof ExpenseSchema>;
-export const NewExpenseSchema = ExpenseSchema.omit({
-    id: true,
-    transactions: true,
-}).extend({
-    typeTransaction: z.nativeEnum(TransactionType),
-    paymentMethod: z.nativeEnum(PaymentMethod),
-    statusPayment: z.nativeEnum(StatusPayment),
-    employeeId: z.string(),
-})
-export type TNewExpense = z.infer<typeof NewExpenseSchema>;
-
+export type TNewNotification = z.infer<typeof NewNotificationSchema>;
 
 //** Settings */
 export const SettingsSchema = z.object({
@@ -379,6 +294,42 @@ export const NewSettingsSchema = SettingsSchema.omit({
     id: true,
 });
 export type TNewSettings = z.infer<typeof NewSettingsSchema>;
+
+
+
+//** SalesMetrics */
+export const SalesMetricsSchema = z.object({
+    id: z.string(),
+    totalSales: z.coerce.number().min(0),
+    totalRevenue: z.coerce.number().min(0.01),
+    totalCostOperational: z.coerce.number().min(0.01),
+    totalCommission: z.coerce.number().min(0.01),
+    netProfit: z.coerce.number().min(0.01),
+    marketingBudget: z.coerce.number().min(0.01),
+    conversionRate: z.coerce.number().min(0.01),
+    roi: z.coerce.number().min(0.01),
+    createdAt: z.date()
+})
+export type TSalesMetrics = z.infer<typeof SalesMetricsSchema>
+export const NewSalesMetricsSchema = SalesMetricsSchema.omit({})
+export type TNewSalesMetrics = z.infer<typeof NewSalesMetricsSchema>
+
+
+export const ChangePermissionSchema = z.object({
+    userId: z.string(),
+    permission: z.boolean(),
+})
+export type TChangePermission = z.infer<typeof ChangePermissionSchema>
+
+export const ChangeRoleSchema = z.object({
+    userId: z.string(),
+    role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.CLIENT]),
+})
+export type TChangeRole = z.infer<typeof ChangeRoleSchema>
+
+
+
+
 export const NewCashReserverSchema = z.object({
     id: z.string(),
     cashLiquid: z.number().min(0.01, { 'message': 'El monto es requerido' }),
@@ -386,54 +337,19 @@ export const NewCashReserverSchema = z.object({
 export type TNewCashReserver = z.infer<typeof NewCashReserverSchema>;
 
 
-//** Notification */
-export const NotificationSchema = z.object({
-    id: z.string(),
-    userId: z.string(),
-    type: z.nativeEnum(NotificationType),
-    title: z.string(),
-    message: z.string(),
-    link: z.string(),
-    read: z.boolean(),
-    createdAt: z.date(),
-    user: UserSchema.optional(),
-});
-export type TNotification = z.infer<typeof NotificationSchema>;
-export const NewNotificationSchema = NotificationSchema.omit({
-    id: true,
-    user: true,
-    userId: true,
-});
-export type TNewNotification = z.infer<typeof NewNotificationSchema>;
 
-//** CreditSale */
-export const CreditSaleSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    description: z.string().nullable(),
-    userId: z.string(),
-    user: UserSchema.optional(),
-    transactionId: z.string(),
-    transaction: TransactionSchema.optional(),
-});
-export type TCreditSale = z.infer<typeof CreditSaleSchema>;
-export const NewCreditSaleSchema = CreditSaleSchema.omit({
-    id: true,
-    transaction: true,
-});
-export type TNewCreditSale = z.infer<typeof NewCreditSaleSchema>;
+
+
 //** Assert Types */
 function assertTypesAreCompatible(): void {
-    const assertTypeWarehouse: Warehouse = {} as TWarehouse;
-    const assertTypeProduct: Product = {} as TProduct;
-    const assertTypeSupplier: Supplier = {} as TSupplier;
-    const assertTypeCategory: Category = {} as TCategory;
-    const assertTypeCashFlow: CashFlow = {} as TCashFlow;
-    const assertTypeSaleTransaction: Transaction = {} as TTransaction;
-    const assertTypeProductSaleTransaction: ProductSaleTransaction = {} as TProductSaleTransaction;
-    const assertTypeCashReconsiliation: CashReconsiliation = {} as TCashReconsiliation;
-    const assertTypeExpense: Expense = {} as TExpense;
-    const assertTypeSettings: Settings = {} as TSettings;
+
+    const assertTypeUser: User = {} as TUser;
+    const assertTypeSettingsAccount: SettingsAccount = {} as TSettingsAccount;
+    const assertTypeServiceTransaction: ServiceTransaction = {} as TServiceTransaction;
+    const assertTypeSaleService: Service = {} as TService;
+    const assertTypeAppointment: Appointment = {} as TAppointment;
+    const assertTypeEmployee: Employee = {} as TEmployee;
     const assertTypeNotification: Notification = {} as TNotification;
-    const assertTypeCreditSale: CreditSale = {} as TCreditSale;
+    const assertTypeSettings: Settings = {} as TSettings;
+    const assertTypeSalesMetrics: SalesMetrics = {} as TSalesMetrics;
 }

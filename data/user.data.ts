@@ -37,27 +37,18 @@ export const getUserById = async (id: string) => {
                 notifications: {
                     take: 10,
                 },
-                creditSales: {
-                    take: 10,
-                    include: {
-                        transaction: {
-                            include: {
-                                productSaleTransaction: true
-                            }
-                        }
-                    }
-                },
-                employee: {
-                    include: {
-                        transactions: {
-                            take: 10,
-                            include: {
-                                productSaleTransaction: true
-                            }
 
-                        }
-                    }
-                }
+                // employee: {
+                //     include: {
+                //         transactions: {
+                //             take: 10,
+                //             include: {
+                //                 productSaleTransaction: true
+                //             }
+
+                //         }
+                //     }
+                // }
             }
         })
 

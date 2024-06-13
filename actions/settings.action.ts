@@ -3,7 +3,7 @@ import { CustomError } from '@/lib/custom-error.class'
 import { db } from '@/lib/db'
 import { ResServer } from '@/lib/interfaces'
 import { PrivateRoute } from '@/lib/routes'
-import { CurrencyType, LocaleType, TransactionType } from '@prisma/client'
+import { CurrencyType, LocaleType } from '@prisma/client'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { revalidatePath } from 'next/cache'
 
@@ -60,66 +60,6 @@ export const UpdateCurrencyType = async ({ id, currencyType }: IUpdateCurrencyTy
     }
 }
 
-interface IUpdateCashReserver {
-    value: number,
-    type: TransactionType
-}
-export const cashReserverUpdate = async ({ value, type }: IUpdateCashReserver): Promise<ResServer> => {
-    try {
-        if (!value) throw new CustomError('Valor es requerido', 400)
-        if (!type) throw new CustomError('Tipo de transacción es requerido', 400)
-
-        const setting = await db.settings.findFirst()
-        if (!setting) throw new CustomError("Error al obtener la configuración", 400);
-
-        let newCash = 0
-        switch (type) {
-            case TransactionType.SALE:
-                newCash = setting.cashReserves + value
-                break;
-            case TransactionType.PURCHASE:
-                newCash = setting.cashReserves - value
-                break;
-            case TransactionType.EXPENSE:
-                newCash = setting.cashReserves - value
-                break;
-            default:
-                throw new CustomError("Tipo de transacción no válida.", 400);
-        }
-        await db.settings.update({
-            where: {
-                id: setting.id,
-            },
-            data: {
-                cashReserves: newCash
-            },
-        });
-
-        revalidatePath(PrivateRoute.SETTINGS.href)
-        return {
-            error: false,
-            message: 'Liquidez actualizada con éxito',
-            code: 200,
-        }
-    } catch (error) {
-        console.error('Error updating cash reserver:', error)
-        if (error instanceof CustomError) {
-            return {
-                error: true,
-                message: error.message,
-                code: error.code,
-            }
-        }
-        if (error instanceof PrismaClientKnownRequestError) {
-            return { error: true, code: 500, message: 'Error en base de datos al actualizar la liquidez' }
-        }
-        return {
-            error: true,
-            message: 'Error al actualizar la liquidez',
-            code: 500,
-        }
-    }
-}
 
 export interface INewCashReserver {
     cashLiquid: number,

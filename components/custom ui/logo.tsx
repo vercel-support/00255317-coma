@@ -1,4 +1,4 @@
-import { PrivateRoute } from "@/lib/routes";
+import { PrivateRoute, PublicRoute } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Store } from "lucide-react";
 import Image from "next/image";
@@ -8,7 +8,7 @@ interface LogoProps {
 }
 export const Logo = ({ flexCol = false }: LogoProps) => {
   return (
-    <Link href={PrivateRoute.TPV.href}>
+    <Link href={PublicRoute.HOME.href}>
       <div
         className={cn(
           "text-2xl text-branding font-bold uppercase flex flex-col items-center justify-center",

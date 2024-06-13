@@ -106,6 +106,7 @@ export async function ChangedPermission({ id, permission }: { id: string, permis
             const Newemployee = await db.employee.create({
                 data: {
                     userId: id,
+                    position: 'terapeuta'
                 }
             })
 
@@ -148,6 +149,7 @@ export async function ChangedRole({ id, role }: { id: string, role: UserRole }):
             const Newemployee = await db.employee.create({
                 data: {
                     userId: id,
+                    position: 'terapeuta'
                 }
             })
 
@@ -306,6 +308,7 @@ export async function createUsersTest(): Promise<void> {
                 const Newemployee = await db.employee.create({
                     data: {
                         userId: user.id,
+                        position: 'terapeuta'
                     }
                 });
                 await db.user.update({

@@ -1,6 +1,6 @@
 {
-  "name": "gesapp",
-  "version": "0.0.3",
+  "name": "coma",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

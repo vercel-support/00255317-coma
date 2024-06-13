@@ -1,11 +1,14 @@
 import {
   BadgeDollarSign,
+  Building2,
+  Cookie,
+  Home,
   LayoutDashboard,
-  Monitor,
+  Phone,
+  ScrollText,
   Settings,
+  ShieldCheck,
   ShoppingBasket,
-  Truck,
-  Warehouse,
 } from "lucide-react";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { PrivateRoute } from "./routes";
@@ -18,32 +21,12 @@ export const MenuItemsAdmin = [
     href: PrivateRoute.DASHBOARD.href,
     icon: <LayoutDashboard className="w-6 h-6" />,
   },
+
   {
-    title: PrivateRoute.TPV.title,
-    name: PrivateRoute.TPV.title,
-    path: PrivateRoute.TPV.path,
-    href: PrivateRoute.TPV.href,
-    icon: <Monitor className="w-6 h-6" />,
-  },
-  {
-    title: PrivateRoute.SUPPLIERS.title,
-    name: PrivateRoute.SUPPLIERS.title,
-    path: PrivateRoute.SUPPLIERS.path,
-    href: PrivateRoute.SUPPLIERS.href,
-    icon: <Truck className="w-6 h-6" />,
-  },
-  {
-    title: PrivateRoute.WAREHOUSES.title,
-    name: PrivateRoute.WAREHOUSES.title,
-    path: PrivateRoute.WAREHOUSES.path,
-    href: PrivateRoute.WAREHOUSES.href,
-    icon: <Warehouse className="w-6 h-6" />,
-  },
-  {
-    title: PrivateRoute.PRODUCTS.title,
-    name: PrivateRoute.PRODUCTS.title,
-    path: PrivateRoute.PRODUCTS.path,
-    href: PrivateRoute.PRODUCTS.href,
+    title: PrivateRoute.CONSULTINGS.title,
+    name: PrivateRoute.CONSULTINGS.title,
+    path: PrivateRoute.CONSULTINGS.path,
+    href: PrivateRoute.CONSULTINGS.href,
     icon: <ShoppingBasket className="w-6 h-6" />,
   },
   {
@@ -67,5 +50,53 @@ export const MenuItemsAdmin = [
     path: PrivateRoute.SETTINGS.path,
     href: PrivateRoute.SETTINGS.href,
     icon: <Settings className="w-6 h-6" />,
+  },
+];
+
+export const MenuItems = [
+  {
+    title: PrivateRoute.HOME.title,
+    name: PrivateRoute.HOME.title,
+    path: PrivateRoute.HOME.path,
+    href: PrivateRoute.HOME.href,
+    icon: <Home className="w-6 h-6" />,
+  },
+  {
+    title: PrivateRoute.US.title,
+    name: PrivateRoute.US.title,
+    path: PrivateRoute.US.path,
+    href: PrivateRoute.US.href,
+    icon: <Building2 className="w-6 h-6" />,
+  },
+  {
+    title: PrivateRoute.CONTACT.title,
+    name: PrivateRoute.CONTACT.title,
+    path: PrivateRoute.CONTACT.path,
+    href: PrivateRoute.CONTACT.href,
+    icon: <Phone className="w-6 h-6" />,
+  },
+];
+
+export const MenuFooterItems = [
+  {
+    title: PrivateRoute.COOKIES.title,
+    name: PrivateRoute.COOKIES.title,
+    path: PrivateRoute.COOKIES.path,
+    href: PrivateRoute.COOKIES.href,
+    icon: <Cookie className="w-6 h-6" />,
+  },
+  {
+    title: PrivateRoute.POLICY.title,
+    name: PrivateRoute.POLICY.title,
+    path: PrivateRoute.POLICY.path,
+    href: PrivateRoute.POLICY.href,
+    icon: <ShieldCheck className="w-6 h-6" />,
+  },
+  {
+    title: PrivateRoute.TERMS.title,
+    name: PrivateRoute.TERMS.title,
+    path: PrivateRoute.TERMS.path,
+    href: PrivateRoute.TERMS.href,
+    icon: <ScrollText className="w-6 h-6" />,
   },
 ];

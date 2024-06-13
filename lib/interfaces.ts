@@ -11,20 +11,6 @@ export interface ItemMenuAsideAdmin extends TRoute {
     role?: string[];
 }
 
-export enum CurrencyType {
-    Euro = "EUR",
-    PesoArgentino = "ARS",
-    Dólares = "USD",
-    Shekels = "ILS",
-}
-
-export enum LocaleType {
-    Arg = "es-AR",
-    EEUU = "en-US",
-    Esp = "es-ES",
-    Il = "he-IL",
-}
-
 export interface DateRange {
     startDate: Date;
     endDate: Date;
