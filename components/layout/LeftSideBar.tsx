@@ -6,20 +6,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@/components/auth/user-button";
 import { ModeToggle } from "@/components/custom ui/toggle-mode";
+import { Logo } from "../custom ui/logo";
 
 const LeftSideBar = () => {
   const pathname = usePathname();
 
   return (
     <aside className="min-w-[250px] h-screen left-0 top-0 sticky p-8 pt-2 flex flex-col gap-4 bg-card shadow-lg max-md:hidden overflow-auto">
-      <div className="w-full flex items-center justify-center bg-branding rounded-md shadow-sm p-2">
-        <Image
-          src="/logo-gesapp-white.svg"
-          alt="Gesapp"
-          width={50}
-          height={50}
-        />
-        <h3 className="text-white font-extrabold text-xl uppercase">Gesapp</h3>
+      <div className="w-full flex items-center justify-center  rounded-md shadow-sm p-2">
+        <Logo />
       </div>
       <div className="w-full flex flex-col h-full justify-between">
         <div className="flex h-[80%] flex-col justify-between mb-3">

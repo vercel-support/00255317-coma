@@ -13,19 +13,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@/components/auth/user-button";
 import { ModeToggle } from "@/components/custom ui/toggle-mode";
+import { Logo } from "../custom ui/logo";
 
 const TopBar = () => {
   const pathname = usePathname();
   return (
     <div className="sticky top-0 z-20 w-full flex justify-between px-8 py-2 items-center bg-card shadow-xl md:hidden">
       <div className="w-[50%] flex items-center justify-center bg-branding rounded-md shadow-sm">
-        <Image
-          src="/logo-gesapp-white.svg"
-          alt="Gesapp"
-          width={50}
-          height={50}
-        />
-        <h3 className="text-white font-extrabold text-xl uppercase">Gesapp</h3>
+        <Logo />
       </div>
       <div className="relative flex gap-4 items-center">
         <ModeToggle />

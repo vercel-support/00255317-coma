@@ -43,9 +43,9 @@ html, body, :root{
   }
  
   .dark {
-    --branding:hsl(220, 65%, 46%); 
-    --branding-second: hsl(342, 67%, 63%); 
-    --branding-third: hsl(12, 100%, 63%); 
+    --branding:hsl(220, 65%, 30.6%); 
+    --branding-second: hsl(342, 67%, 55%); 
+    --branding-third: hsl(12, 100%, 60%); 
 
     --background: hsl(222.2, 84%, 4.9%);
     --foreground: hsl(212, 25%, 90%);

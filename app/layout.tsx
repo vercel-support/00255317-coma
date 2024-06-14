@@ -40,9 +40,9 @@ export default async function RootLayout({
             attribute="class"
             defaultTheme="system"
             enableSystem={true}
-            storageKey="foodyapp-theme"
+            storageKey="comoa-theme"
           >
-            <NextTopLoader color="#4299e1" showSpinner={false} />
+            <NextTopLoader color="#e06287" showSpinner={false} />
             <Toaster />
             <ScrollToTop>{children}</ScrollToTop>
           </ThemeProvider>
