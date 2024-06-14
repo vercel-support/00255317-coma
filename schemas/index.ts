@@ -81,43 +81,41 @@ export const SettingsUserSchema = z.object({
 export type TSettingsUser = z.infer<typeof SettingsUserSchema>
 
 
-export const LoginSchema = UserSchema.omit({
-    name: true,
-    emailVerified: true,
-    acepTerms: true,
-    image: true,
-    permission: true,
-}).extend({
-    password: z.string().min(6, {
-        message: 'Por favor ingresa una contraseña válida',
-    }),
+export const LoginSchema = z.object({
+    email: z.optional(z.string().email({
+        message: 'Por favor ingresa un correo válido',
+    })),
+    password: z.optional(z.string().min(6, {
+        message: 'Mínimo 6 caracteres',
+    })),
     code: z.optional(z.string().min(6, {
         message: 'Por favor ingresa un código válido',
     })),
-});;
+})
 export type TLogin = z.infer<typeof LoginSchema>;
 
-export const RegisterSchema = UserSchema.omit({
-    emailVerified: true,
-    image: true,
-    permission: true,
+export const RegisterSchema = z.object({
+    name: z.optional(z.string()),
+    email: z.optional(z.string().email({
+        message: 'Por favor ingresa un correo válido',
+    })),
+    password: z.optional(z.string().min(6, {
+        message: 'Mínimo 6 caracteres',
+    })),
+    aceptTerms: z.boolean()
 })
 
-export const ResetSchema = UserSchema.omit({
-    name: true,
-    emailVerified: true,
-    acepTerms: true,
-    image: true,
-    password: true,
+export const ResetSchema = z.object({
+    email: z.optional(z.string().email({
+        message: 'Por favor ingresa un correo válido',
+    })),
 })
 export type TReset = z.infer<typeof ResetSchema>;
 
-export const NewPasswordSchema = UserSchema.omit({
-    name: true,
-    emailVerified: true,
-    acepTerms: true,
-    image: true,
-    email: true,
+export const NewPasswordSchema = z.object({
+    password: z.string().min(6, {
+        message: 'Mínimo 6 caracteres',
+    }),
 })
 export type TNewPassword = z.infer<typeof NewPasswordSchema>;
 export type TRegister = z.infer<typeof RegisterSchema>;

@@ -3,11 +3,10 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 import { getUserById } from "@/data/user.data"
 import { db } from "@/lib/db"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { User, UserRole } from "@prisma/client"
+import { UserRole } from "@prisma/client"
 import NextAuth from "next-auth"
 
 import { getAccountByUserId } from "./data/account"
-import { TCreditSale, TEmployee, TNotification } from "./schemas"
 import { PublicRoute } from "./lib/routes"
 
 export const {
@@ -38,8 +37,8 @@ export const {
             if (!user.id) return false
             const existingUser = await getUserById(user.id)
             if (!existingUser?.emailVerified) return false
-            if (!existingUser?.permission) return false
-            if (existingUser?.role !== UserRole.ADMIN) return false
+            //if (!existingUser?.permission) return false
+            //if (existingUser?.role !== UserRole.ADMIN) return false
 
             if (existingUser.isTwoFactorEnabled) {
                 const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)

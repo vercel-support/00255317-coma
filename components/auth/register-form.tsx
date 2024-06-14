@@ -33,7 +33,7 @@ export const RegisterForm = () => {
       email: undefined,
       password: undefined,
       name: undefined,
-      acepTerms: false,
+      aceptTerms: false,
     },
   });
 
@@ -122,7 +122,7 @@ export const RegisterForm = () => {
             <Formsuccess message={success} />
             <FormField
               control={form.control}
-              name="acepTerms"
+              name="aceptTerms"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow bg-white dark:bg-background">
                   <FormControl>

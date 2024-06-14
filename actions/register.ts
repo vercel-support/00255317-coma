@@ -16,12 +16,12 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
             return { error: "campos inválidos" }
         }
 
-        const { email, password, name, acepTerms } = validatedFields.data;
-        if (!acepTerms) {
+        const { email, password, name, aceptTerms } = validatedFields.data;
+        if (!aceptTerms) {
             return { error: "Debe aceptar los términos y condiciones" }
         }
         // Verificar si el usuario ya existe
-        const existingUser = await getUserByEmail(email);
+        const existingUser = await getUserByEmail(email!);
         if (existingUser) {
             return { error: "Usuario ya registrado" }
         }
@@ -33,10 +33,10 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         // Crear nuevo usuario
         await db.user.create({
             data: {
-                email,
+                email: email || '',
                 password: hash,
-                name,
-                acepTerms,
+                name: name || '',
+                acepTerms: aceptTerms,
                 emailVerified: undefined,
                 lastName: '',
                 address: '',
@@ -50,8 +50,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
             }
         })
 
-        const verificationToken = await generateVerificationToken(email);
-        await sendVerificationEmail(verificationToken.email, verificationToken.token);
+        const verificationToken = await generateVerificationToken(email!);
+        const resemail = await sendVerificationEmail(verificationToken.email, verificationToken.token);
+        console.log('[EMAIL VERIFICATIOM] -> ', { resemail });
         return { success: "Email de verificación enviado" }
     } catch (error) {
         console.error('[REGISTER]', { error });

@@ -11,7 +11,7 @@ import {
   ShoppingBasket,
 } from "lucide-react";
 import { PiUsersThreeBold } from "react-icons/pi";
-import { PrivateRoute } from "./routes";
+import { PrivateRoute, PublicRoute } from "./routes";
 
 export const MenuItemsAdmin = [
   {
@@ -55,48 +55,48 @@ export const MenuItemsAdmin = [
 
 export const MenuItems = [
   {
-    title: PrivateRoute.HOME.title,
-    name: PrivateRoute.HOME.title,
-    path: PrivateRoute.HOME.path,
-    href: PrivateRoute.HOME.href,
+    title: PublicRoute.HOME.title,
+    name: PublicRoute.HOME.title,
+    path: PublicRoute.HOME.path,
+    href: PublicRoute.HOME.href,
     icon: <Home className="w-6 h-6" />,
   },
   {
-    title: PrivateRoute.US.title,
-    name: PrivateRoute.US.title,
-    path: PrivateRoute.US.path,
-    href: PrivateRoute.US.href,
+    title: PublicRoute.US.title,
+    name: PublicRoute.US.title,
+    path: PublicRoute.US.path,
+    href: PublicRoute.US.href,
     icon: <Building2 className="w-6 h-6" />,
   },
   {
-    title: PrivateRoute.CONTACT.title,
-    name: PrivateRoute.CONTACT.title,
-    path: PrivateRoute.CONTACT.path,
-    href: PrivateRoute.CONTACT.href,
+    title: PublicRoute.CONTACT.title,
+    name: PublicRoute.CONTACT.title,
+    path: PublicRoute.CONTACT.path,
+    href: PublicRoute.CONTACT.href,
     icon: <Phone className="w-6 h-6" />,
   },
 ];
 
 export const MenuFooterItems = [
   {
-    title: PrivateRoute.COOKIES.title,
-    name: PrivateRoute.COOKIES.title,
-    path: PrivateRoute.COOKIES.path,
-    href: PrivateRoute.COOKIES.href,
+    title: PublicRoute.COOKIES.title,
+    name: PublicRoute.COOKIES.title,
+    path: PublicRoute.COOKIES.path,
+    href: PublicRoute.COOKIES.href,
     icon: <Cookie className="w-6 h-6" />,
   },
   {
-    title: PrivateRoute.POLICY.title,
-    name: PrivateRoute.POLICY.title,
-    path: PrivateRoute.POLICY.path,
-    href: PrivateRoute.POLICY.href,
+    title: PublicRoute.POLICY.title,
+    name: PublicRoute.POLICY.title,
+    path: PublicRoute.POLICY.path,
+    href: PublicRoute.POLICY.href,
     icon: <ShieldCheck className="w-6 h-6" />,
   },
   {
-    title: PrivateRoute.TERMS.title,
-    name: PrivateRoute.TERMS.title,
-    path: PrivateRoute.TERMS.path,
-    href: PrivateRoute.TERMS.href,
+    title: PublicRoute.TERMS.title,
+    name: PublicRoute.TERMS.title,
+    path: PublicRoute.TERMS.path,
+    href: PublicRoute.TERMS.href,
     icon: <ScrollText className="w-6 h-6" />,
   },
 ];
