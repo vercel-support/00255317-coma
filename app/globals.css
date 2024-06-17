@@ -7,9 +7,9 @@ html, body, :root{
 }
 @layer base {
   :root {
-    --branding:hsl(220, 65%, 30.6%); 
-    --branding-second: hsl(342, 67%, 55%); 
-    --branding-third: hsl(12, 100%, 60%); 
+    --branding:hsl(220, 65%, 36%); 
+    --branding-second: hsl(342, 67%, 62%); 
+    --branding-third: hsl(12, 100%, 65%); 
 
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(222.2, 84%, 4.9%);
@@ -43,9 +43,9 @@ html, body, :root{
   }
  
   .dark {
-    --branding:hsl(220, 65%, 30.6%); 
-    --branding-second: hsl(342, 67%, 55%); 
-    --branding-third: hsl(12, 100%, 60%); 
+    --branding:hsl(220, 65%, 36%); 
+    --branding-second: hsl(342, 67%, 62%); 
+    --branding-third: hsl(12, 100%, 65%); 
 
     --background: hsl(222.2, 84%, 4.9%);
     --foreground: hsl(212, 25%, 90%);

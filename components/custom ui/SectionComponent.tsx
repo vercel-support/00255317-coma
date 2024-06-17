@@ -26,7 +26,7 @@ const SectionComponent = ({
     <section
       id={sectionId}
       className={cn(
-        "w-screen min-h-screen overflow-auto flex flex-col items-center justify-start pt-20 gap-6 pb-4",
+        "w-screen min-h-screen overflow-y-auto flex flex-col items-between justify-center pt-16 gap-6 pb-4",
         bgBrandingRadial &&
           "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brandingThird to-brandingSecond",
         className

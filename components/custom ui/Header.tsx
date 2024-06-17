@@ -10,6 +10,7 @@ import { ModeToggle } from "./toggle-mode";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { UserMenu } from "./user-menu";
 import MenuHeader from "./MenuHeader";
+import Image from "next/image";
 
 const Header = () => {
   const user = useCurrentUser();
@@ -33,11 +34,17 @@ const Header = () => {
       className={cn(
         "fixed z-50 w-full flex items-center justify-between p-2 max-md:bg-brandingDark",
         scroll &&
-          "bg-brandingDark bg-brandingSecond transition-all duration-500 ease-in-out shadow-md",
+          "bg-branding transition-all duration-500 ease-in-out shadow-md",
         path.startsWith("/auth") && "hidden"
       )}
     >
-      <Logo size="small" />
+      {/* <Logo size="small" /> */}
+      <Image
+        src={"/LOGO_HORIZONTAL_945PX_V2.svg"}
+        alt="COMA"
+        width={150}
+        height={150}
+      />
       <MenuHeader />
       <div className="flex items-center justify-end gap-2">
         <ModeToggle />

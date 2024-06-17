@@ -18,6 +18,14 @@ import { FormError } from "./form-error";
 import { PrivateRoute } from "@/lib/routes";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
 const AppoinmentForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -55,8 +63,21 @@ const AppoinmentForm = () => {
   //       });
   //   });
   // };
+
+  const situation = [
+    {
+      id: "Noviazgo o en Búsqueda de pareja.",
+      name: "Noviazgo o en Búsqueda de pareja.",
+    },
+    { id: "Pareja estable", name: "Pareja estable" },
+    { id: "Recien casados.", name: "Recien casados." },
+    {
+      id: "Pareja o matrimonio con hijos.",
+      name: "Pareja o matrimonio con hijos.",
+    },
+  ];
   return (
-    <Card className="w-full ">
+    <Card className="w-full p-8">
       <Form {...form}>
         <form className="space-y-6 p-2" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
@@ -69,7 +90,7 @@ const AppoinmentForm = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="Nombre de la categoría"
+                      placeholder="tu nombre"
                       disabled={isPending}
                     />
                   </FormControl>
@@ -77,18 +98,92 @@ const AppoinmentForm = () => {
                 </FormItem>
               )}
             />
+            <div className="w-full flex items-center gap-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        {...field}
+                        placeholder="tu_email@email.com"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Teléfono</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="tel"
+                        {...field}
+                        placeholder="Tu teléfono de contacto"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
-              name="description"
+              name="situation"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className="font-bold">
+                    {" "}
+                    ¿En qué fase está tu relación?{" "}
+                  </FormLabel>
+                  <Select
+                    disabled={isPending}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="--Selecciona--"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {situation.map((t) => (
+                        <SelectItem key={t.id} value={t.id}>
+                          {t.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descripción</FormLabel>
+                  <FormLabel>
+                    Cuentanos que te gustaria tratar en la Asesoría.
+                  </FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       {...field}
-                      placeholder="Breve descripción de la categoría"
+                      placeholder="Mensaje"
                       disabled={isPending}
-                      value={field.value ?? ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -98,42 +193,9 @@ const AppoinmentForm = () => {
           </div>
           <FormError message={error} />
 
-          <div className="w-full  mt-4">
-            <div className="w-full flex items-center justify-center bg-destructive rounded-t-md pt-2">
-              <div className="w-full flex gap-2 items-center justify-center font-bold text-xl text-white">
-                <FiAlertTriangle strokeWidth={2} /> ZONA DE PELIGRO{" "}
-                <FiAlertTriangle strokeWidth={2} />
-              </div>
-            </div>
-            <div className="flex max-md:flex-col items-center gap-2 border-2 border-destructive rounded-b-md  p-2 justify-end bg-destructive">
-              <div className="w-full lg:w-1/3 flex flex-row items-center justify-between rounded-lg border-2 p-4 border-destructive bg-background gap-2">
-                Eliminar Categoría
-                <Button
-                  disabled={isPending}
-                  variant={"destructive"}
-                  size={"icon"}
-                  onClick={() => setOpen(true)}
-                  className="w-full"
-                  type="button"
-                >
-                  <Trash className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
           <div className="flex flex-col items-end justify-between gap-4">
             <Button disabled={isPending} type="submit" className="w-full">
-              guardar
-            </Button>
-            <Button
-              disabled={isPending}
-              type="button"
-              className="w-full"
-              variant={"outline"}
-              onClick={() => router.push(PrivateRoute.CATEGORIES.path)}
-            >
-              Cancelar
+              Enviar
             </Button>
           </div>
         </form>
