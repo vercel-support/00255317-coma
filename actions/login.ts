@@ -22,7 +22,7 @@ export const login = async (
 
     const { email, password, code } = validateFields.data
 
-    const existingUser = await getUserByEmail(email)
+    const existingUser = await getUserByEmail(email!)
 
     if (!existingUser || !existingUser.password || !existingUser.email) {
         return { error: "Credenciales inválidas" }

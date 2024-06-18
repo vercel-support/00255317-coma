@@ -11,10 +11,10 @@ export const resetPassword = async (values: TReset) => {
 
     const { email } = validateFields.data
     try {
-        const existingUser = await getUserByEmail(email)
+        const existingUser = await getUserByEmail(email!)
         if (!existingUser) return { error: 'Email no encontrado!' }
 
-        const passwordResetToken = await generatePasswordResetToken(email)
+        const passwordResetToken = await generatePasswordResetToken(email!)
 
         await sendPasswordResetEmail(passwordResetToken.email, passwordResetToken.token)
 
