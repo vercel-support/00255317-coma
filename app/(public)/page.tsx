@@ -184,7 +184,7 @@ export default function Home() {
               <span className="flex items-center justify-center gap-2">
                 <div className="bg-brandingSecond h-12 min-w-12 rounded-lg flex items-center justify-center">
                   <Image
-                    src={"/ISOTIPO_75PX_V2.svg"}
+                    src={"/ISOTIPO_75PX_V4.svg"}
                     width={25}
                     height={25}
                     alt="isotipo"
@@ -207,7 +207,9 @@ export default function Home() {
                   </h3>
                 </span>
 
-                <p>Aprende a comunicarte de manera efectiva y empática.</p>
+                <p className="dark:text-black">
+                  Aprende a comunicarte de manera efectiva y empática.
+                </p>
               </div>
 
               <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
@@ -220,7 +222,7 @@ export default function Home() {
                   </h3>
                 </span>
 
-                <p>
+                <p className="dark:text-black">
                   Herramientas para manejar y resolver diferencias de manera
                   constructiva.
                 </p>
@@ -236,7 +238,9 @@ export default function Home() {
                   </h3>
                 </span>
 
-                <p>Conecta a un nivel más profundo y significativo.</p>
+                <p className="dark:text-black">
+                  Conecta a un nivel más profundo y significativo.
+                </p>
               </div>
 
               <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
@@ -249,7 +253,7 @@ export default function Home() {
                   </h3>
                 </span>
 
-                <p>
+                <p className="dark:text-black">
                   Estrategias para fortalecer la confianza y mantener la
                   fidelidad.
                 </p>
@@ -320,26 +324,6 @@ export default function Home() {
               <CarouselNext />
             </Carousel>
           </div>
-          {/* <div className="w-full h-full ">
-
-            <div className="relative h-full w-full rounded-lg shadow-lg bg-blue-200 dark:bg-branding flex flex-col items-start p-8 z-10">
-    
-              <div className="absolute -top-4  left-6 bg-branding h-12 w-12 rounded-lg flex items-center justify-center z-20">
-                <MdCommentBank className="text-white h-10 w-10" />
-              </div>
-              <div className="p-2">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam saepe, reprehenderit veniam libero alias nobis
-                  distinctio dicta voluptatibus repudiandae optio, temporibus ea
-                  aliquam molestiae totam a velit corporis cupiditate cum!
-                </p>
-              </div>
-              <div>
-                <p className="font-bold">Nombre - lugar</p>
-              </div>
-            </div>
-          </div> */}
           <div className="w-full flex items-center justify-center">
             <div className="relative w-[300px] h-[300px] bg-brandingThird  rounded-t-full border-8 border-brandingSecond overflow-visible shadow-2xl">
               <div className="absolute -top-[34px] -left-[15px] w-[750px] h-[750px]">
@@ -433,11 +417,11 @@ export default function Home() {
                   <AccordionTrigger> ¿Cómo consigo cita?</AccordionTrigger>
                   <AccordionContent>
                     <div className="w-full ">
-                      <p className="text-lg text-gray-600 mb-6">
+                      <p className="text-lg text-gray-600 dark:text-white mb-6">
                         Para conseguir tu cita con nosotros, sigue estos
                         sencillos pasos:
                       </p>
-                      <div className="bg-white shadow-md rounded-lg p-8 w-full">
+                      <div className="bg-white dark:bg-branding shadow-md rounded-lg p-8 w-full">
                         <ol className="list-decimal list-inside">
                           <li className="mb-4">
                             <span className="font-semibold">
@@ -473,7 +457,7 @@ export default function Home() {
                             deberás sacar otra cita.
                           </li>
                         </ol>
-                        <p className="mt-8 text-sm text-gray-500">
+                        <p className="mt-8 text-sm text-gray-500 dark:text-white">
                           Debido a la alta demanda, hay una espera de una semana
                           a semana y media para la asignación de citas.
                         </p>
@@ -492,8 +476,8 @@ export default function Home() {
         {/* div 1 */}
         <div className="w-full h-full flex flex-col items-center md:items-start gap-2 mb-4">
           <span className="flex items-center justify-center gap-2">
-            <div className="bg-branding h-8 w-8 rounded-lg flex items-center justify-center">
-              <IoCalendarOutline className="text-white h-6 w-6" />
+            <div className="bg-branding h-12 min-w-12 rounded-lg flex items-center justify-center">
+              <IoCalendarOutline className="text-white h-8 w-8" />
             </div>
             <h2 className="text-3xl text-branding dark:text-white uppercase">
               ¿Listos para una transformación?
