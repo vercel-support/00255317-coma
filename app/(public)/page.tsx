@@ -89,11 +89,11 @@ export default function Home() {
         <div className=" w-full h-full flex flex-col items-center md:items-end justify-center ">
           {/* ventana con pareja */}
           <div className="relative w-[300px] h-[300px] bg-brandingSecond  rounded-t-full border-8 border-white overflow-visible shadow-2xl">
-            <div className="absolute top-[-148px] left-[-210px] w-[650px] h-[650px]">
+            <div className="absolute top-[-148px] left-[-250px] w-[696px] h-[696px]">
               <Image
                 src="/pareja.png"
-                width={900}
-                height={900}
+                width={980}
+                height={980}
                 alt="pareja"
                 className="object-contain"
               />
