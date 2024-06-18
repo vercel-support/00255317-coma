@@ -424,7 +424,7 @@ export default function Home() {
                     éxito radica en la disposición genuina del cliente para
                     recibir y aplicar los consejos y estrategias proporcionadas
                     por nuestros expertos. Cuando hay apertura, predisposición y
-                    una implementación activa de las recomendaciones, COMA
+                    una implementación activa de las recomendaciones, C.O.M.A
                     garantiza una mejora significativa en la relación de pareja.
                     La efectividad de nuestras asesorías se basa en un enfoque
                     personalizado y en la participación comprometida de ambas
