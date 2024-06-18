@@ -199,7 +199,7 @@ const AppoinmentForm = () => {
               type="submit"
               className="w-full font-bold"
             >
-              Reserva tu sesión exclusiva
+              Reserva tu asesoría exclusiva
             </Button>
           </div>
         </form>
