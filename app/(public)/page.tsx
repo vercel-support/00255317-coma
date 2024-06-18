@@ -381,9 +381,10 @@ export default function Home() {
                     comunicación directa y efectiva desde la comodidad de tu
                     hogar. Al reservar tu asesoría, recibirás un enlace para
                     acceder a la sesión en la fecha y hora programadas. Durante
-                    la sesión, un experto en relaciones de pareja te guiará a
-                    través de estrategias personalizadas para abordar tus
-                    inquietudes y mejorar tu relación.
+                    la sesión, el Rabino Gabriel Curdi, experto terapeuta en
+                    relaciones de pareja te guiará a través de estrategias
+                    personalizadas para abordar tus inquietudes y mejorar tu
+                    relación.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
@@ -393,10 +394,10 @@ export default function Home() {
                   <AccordionContent>
                     El costo de una sesión de asesoría es de $250 (dolares
                     americanos). Este precio incluye una hora de asesoría
-                    personalizada con uno de nuestros expertos en relaciones de
-                    pareja. Además, al reservar tu sesión, estarás contribuyendo
-                    al desarrollo continuo de nuestro servicio para seguir
-                    ofreciendo el mejor apoyo posible.
+                    personalizada con el Rabino Gabriel Curdi. Además, al
+                    reservar tu sesión, estarás contribuyendo al desarrollo
+                    continuo de nuestro servicio para seguir ofreciendo el mejor
+                    apoyo posible.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
@@ -405,12 +406,12 @@ export default function Home() {
                     Sí, nuestras asesorías son altamente efectivas. La clave del
                     éxito radica en la disposición genuina del cliente para
                     recibir y aplicar los consejos y estrategias proporcionadas
-                    por nuestros expertos. Cuando hay apertura, predisposición y
-                    una implementación activa de las recomendaciones, C.O.M.A
-                    garantiza una mejora significativa en la relación de pareja.
-                    La efectividad de nuestras asesorías se basa en un enfoque
-                    personalizado y en la participación comprometida de ambas
-                    partes.
+                    por el Rabino Gabriel curdi. Cuando hay apertura,
+                    predisposición y una implementación activa de las
+                    recomendaciones, C.O.M.A garantiza una mejora significativa
+                    en la relación de pareja. La efectividad de nuestras
+                    asesorías se basa en un enfoque personalizado y en la
+                    participación comprometida de ambas partes.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
