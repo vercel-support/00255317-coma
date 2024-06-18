@@ -194,8 +194,12 @@ const AppoinmentForm = () => {
           <FormError message={error} />
 
           <div className="flex flex-col items-end justify-between gap-4">
-            <Button disabled={isPending} type="submit" className="w-full">
-              Enviar
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-full font-bold"
+            >
+              Reserva tu sesión exclusiva
             </Button>
           </div>
         </form>
