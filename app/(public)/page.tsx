@@ -66,14 +66,14 @@ export default function Home() {
       {/* HERO */}
       <section
         id={"hero"}
-        className="w-full h-full  flex max-md:flex-col items-center justify-start   pt-16 gap-8 pb-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brandingThird to-brandingSecond mb-12 px-8"
+        className="w-full h-full  flex max-md:flex-col items-center justify-start   pt-16 gap-8 pb-4  bg-branding mb-12 px-8"
       >
         {/* columna 1 */}
         <div className="w-full flex flex-col items-center">
           <h1 className="text-5xl text-white text-center leading-relaxed mb-4">
             Despierta a un nuevo amanecer en tu relación con la
             <br />
-            <span className="bg-branding rounded-md p-2 font-extrabold ">
+            <span className="text-brandingSecond rounded-md p-2 font-extrabold ">
               asesoría matrimonial y de parejas de C.O.M.A
             </span>
           </h1>
@@ -81,14 +81,14 @@ export default function Home() {
             Mejora la comunicación, resuelve conflictos y recupera la chispa en
             tu relación, en nuestro Centro Calificado de Exelencia.
           </p>
-          <Button variant={"secondary"}>Reserva tu Asesoría ahora</Button>
+          {/* <Button variant={"secondary"}>Reserva tu Asesoría ahora</Button> */}
         </div>
 
         {/* columna 2 */}
         {/* contenedor de ventana */}
         <div className=" w-full h-full flex flex-col items-center md:items-end justify-center ">
           {/* ventana con pareja */}
-          <div className="relative w-[300px] h-[300px] bg-brandingThird  rounded-t-full border-8 border-white overflow-visible shadow-2xl">
+          <div className="relative w-[300px] h-[300px] bg-brandingSecond  rounded-t-full border-8 border-white overflow-visible shadow-2xl">
             <div className="absolute top-[-148px] left-[-210px] w-[650px] h-[650px]">
               <Image
                 src="/pareja.png"
@@ -163,14 +163,17 @@ export default function Home() {
       </section>
 
       {/* seccion 2 */}
-      <section className="w-full h-full mb-12 px-20  py-36" id={"3"}>
+      <section
+        className="w-full h-full mb-12 px-20 py-36 bg-[linear-gradient(180deg,#1d428a_30%,#e06287_50%,#ff6a43_75%,#f5dadf_85%,rgba(245,218,223,0)_100%)]"
+        id={"3"}
+      >
         <div className="w-full h-full flex max-lg:flex-col items-center lg:items-center justify-between  gap-16">
-          <div className="relative min-w-[300px] h-[300px] bg-branding  rounded-t-full border-8 border-brandingSecond overflow-visible shadow-2xl">
-            <div className="absolute -top-[37px] -left-[75px] w-[750px] h-[750px]">
+          <div className="relative min-w-[300px] h-[300px] bg-branding  rounded-t-full border-8 border-white overflow-visible shadow-2xl">
+            <div className="absolute -top-[63px] -left-[115px] w-[750px] h-[750px]">
               <Image
-                src="/pareja2.webp"
-                width={450}
-                height={450}
+                src="/pareja2.png"
+                width={520}
+                height={520}
                 alt="pareja"
                 className="object-contain"
               />
@@ -179,7 +182,7 @@ export default function Home() {
           <div className="w-full h-full flex flex-col items-center justify-center">
             <div className="w-full h-full flex flex-col items-center md:items-start gap-2 mb-4">
               <span className="flex items-center justify-center gap-2">
-                <div className="bg-branding h-12 min-w-12 rounded-lg flex items-center justify-center">
+                <div className="bg-brandingSecond h-12 min-w-12 rounded-lg flex items-center justify-center">
                   <Image
                     src={"/ISOTIPO_75PX_V2.svg"}
                     width={25}
@@ -187,14 +190,14 @@ export default function Home() {
                     alt="isotipo"
                   />
                 </div>
-                <h2 className="text-3xl text-branding dark:text-white uppercase">
+                <h2 className="text-3xl text-white uppercase">
                   ¿Qué podemos hacer por ti?
                 </h2>
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="bg-neutral rounded-md shadow-xl p-6 w-full h-full">
+              <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
                 <span className="w-full flex flex-col items-start gap-2">
                   <div className="bg-brandingThird h-8 w-8 rounded-lg flex items-center justify-center">
                     <FaComment className="text-white" />
@@ -207,7 +210,7 @@ export default function Home() {
                 <p>Aprende a comunicarte de manera efectiva y empática.</p>
               </div>
 
-              <div className="bg-neutral rounded-md shadow-xl p-6 w-full h-full">
+              <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
                 <span className="w-full flex flex-col items-start gap-2">
                   <div className="bg-brandingThird h-8 w-8 rounded-lg flex items-center justify-center">
                     <GiScreaming className="text-white" />
@@ -223,7 +226,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="bg-neutral rounded-md shadow-xl p-6 w-full h-full">
+              <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
                 <span className="w-full flex flex-col items-start gap-2">
                   <div className="bg-brandingThird h-8 w-8 rounded-lg flex items-center justify-center">
                     <FaHeart className="text-white" />
@@ -236,7 +239,7 @@ export default function Home() {
                 <p>Conecta a un nivel más profundo y significativo.</p>
               </div>
 
-              <div className="bg-neutral rounded-md shadow-xl p-6 w-full h-full">
+              <div className="bg-white rounded-md shadow-xl p-6 w-full h-full">
                 <span className="w-full flex flex-col items-start gap-2">
                   <div className="bg-brandingThird h-8 w-8 rounded-lg flex items-center justify-center">
                     <FaShieldAlt className="text-white" />
@@ -268,12 +271,7 @@ export default function Home() {
           </h2>
           <p>La duración de la asesoría online es de 60 minutos</p>
           <h3 className="text-4xl font-extrabold text-brandingSecond">$ 250</h3>
-          <p className="text-xs w-2/3 mb-6">
-            * Debido a la alta demanda, las asesorías están disponibles{" "}
-            <span className="underline"> a partir </span>
-            de una semana después de la confirmación de su reserva. ¡Gracias por
-            su comprensión y paciencia!
-          </p>
+
           <Button className="bg-brandingSecond text-white">
             Pide tu Asesoría
           </Button>
@@ -344,11 +342,11 @@ export default function Home() {
           </div> */}
           <div className="w-full flex items-center justify-center">
             <div className="relative w-[300px] h-[300px] bg-brandingThird  rounded-t-full border-8 border-brandingSecond overflow-visible shadow-2xl">
-              <div className="absolute -top-[29px] -left-[98px] w-[750px] h-[750px]">
+              <div className="absolute -top-[34px] -left-[15px] w-[750px] h-[750px]">
                 <Image
-                  src="/pareja3.png"
-                  width={470}
-                  height={470}
+                  src="/pareja4.png"
+                  width={320}
+                  height={320}
                   alt="pareja"
                   className="object-contain"
                 />
@@ -363,11 +361,11 @@ export default function Home() {
       <section className="w-full mb-12 px-8 md:px-36 py-36 " id={"5"}>
         <div className="w-full h-full flex max-md:flex-col items-center md:items-start justify-between  gap-16">
           <div className="relative min-w-[300px] h-[300px] bg-branding  rounded-t-full border-8 border-brandingSecond overflow-visible shadow-2xl">
-            <div className="absolute -top-[34px] -left-[15px] w-[750px] h-[750px]">
+            <div className="absolute -top-[36px] -left-[19px] w-[750px] h-[750px]">
               <Image
-                src="/pareja4.png"
-                width={320}
-                height={320}
+                src="/pareja3.png"
+                width={480}
+                height={480}
                 alt="pareja"
                 className="object-contain"
               />

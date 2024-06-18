@@ -32,9 +32,8 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed z-50 w-full flex items-center justify-between p-2 max-md:bg-brandingDark",
-        scroll &&
-          "bg-branding transition-all duration-500 ease-in-out shadow-md",
+        "fixed z-50 w-full flex items-center justify-between p-2 bg-branding",
+
         path.startsWith("/auth") && "hidden"
       )}
     >
@@ -51,7 +50,7 @@ const Header = () => {
         {!user ? (
           <Button
             variant={"third"}
-            className="font-extrabold text-white"
+            className="font-extrabold text-white bg-brandingSecond"
             onClick={() => router.push(PublicRoute.LOGIN.href)}
           >
             Iniciar sesión
