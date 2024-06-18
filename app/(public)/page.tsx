@@ -119,14 +119,7 @@ const Reviews = [
       "“Rabino Gabriel, gracias por su mensaje y buenos deseos. Quiero aprovechar esta oportunidad para darle las gracias por contactarme y ayudarme con sus buenos consejos y su sabiduria. A lo largo de los últimos años he vivido momentos de cambio en my vida. Nuevo pais, nuevo idioma, nuevas costumbres, y finalmente nueva forma de vida desde que encontré la Torah. Muchos cambios los enfrenté de la misma optica que tenia de la vida y por ende algunos aspectos de mi vida se fueron a pique. Hoy por hoy estoy levantando cabeza. Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias Georgina desde Paises Bajos”",
     name: "Georgina",
   },
-  {
-    id: 4,
-    message:
-      '" Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
-    complete:
-      '"Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
-    name: "Eugenia",
-  },
+
   {
     id: 5,
     message:
@@ -137,7 +130,7 @@ const Reviews = [
   },
   {
     id: 6,
-    message: `"La efectividad está en hacer lo que usted nos aconseja. El cambio fue muy rápido. Gracias."`,
+    message: `"Yo lo que noté es que la efectividad está en hacer lo que usted nos está aconsejando, si no podemos hablar todo el día con usted pero si no se va a la práctica difícil, el consejo sirve si lo aplicó y efectivamente fue muy rápido el cambio""`,
     complete: `"Yo lo que noté es que la efectividad está en hacer lo que usted nos está aconsejando, si no podemos hablar todo el día con usted pero si no se va a la práctica difícil, el consejo sirve si lo aplicó y efectivamente fue muy rápido el cambio"`,
     name: "",
   },
