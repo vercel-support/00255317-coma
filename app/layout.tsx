@@ -38,9 +38,9 @@ export default async function RootLayout({
         <body className={lato.className}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem={true}
-            storageKey="comoa-theme"
+            storageKey="coma-theme"
           >
             <NextTopLoader color="#e06287" showSpinner={false} />
             <Toaster />

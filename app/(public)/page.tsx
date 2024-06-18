@@ -1,19 +1,21 @@
+"use client";
 import AppoinmentForm from "@/components/custom ui/AppoinmentForm";
-import SectionComponent from "@/components/custom ui/SectionComponent";
-import WindowComponent from "@/components/custom ui/WindowComponent";
-import { Logo } from "@/components/custom ui/logo";
-import { Button } from "@/components/ui/button";
-import { PrivateRoute } from "@/lib/routes";
-import { Crown } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { IoCalendarOutline } from "react-icons/io5";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Crown } from "lucide-react";
+import Image from "next/image";
 import {
   FaChartLine,
   FaComment,
@@ -24,40 +26,138 @@ import {
   FaUserFriends,
 } from "react-icons/fa";
 import { GiScreaming } from "react-icons/gi";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { IoCalendarOutline } from "react-icons/io5";
 import { MdCommentBank } from "react-icons/md";
 
-import ButtonNextSection from "@/components/custom ui/ButtonNextSection";
+// const Reviews = [
+//   {
+//     id: 1,
+//     message:
+//       "“ (...) ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , (…)“",
+//     complete:
+//       "“Con todo respeto me dirijo a usted elogiando su sabiduría, es increíble como después de hablar conmigo pocos minutos  me describe exactamente mi vida y  la de mi pareja , ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , que dios le de salud para que pueda ayudar a mucha gente como lo ha hecho conmigo , mil gracias todha Rava”",
+//     name: "",
+//   },
+//   {
+//     id: 2,
+//     message:
+//       '" Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
+//     complete: "",
+//     name: "Eugenia",
+//   },
+//   {
+//     id: 3,
+//     message:
+//       "“(…) Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias. ” ",
+//     complete:
+//       "“Rabino Gabriel, gracias por su mensaje y buenos deseos. Quiero aprovechar esta oportunidad para darle las gracias por contactarme y ayudarme con sus buenos consejos y su sabiduria. A lo largo de los últimos años he vivido momentos de cambio en my vida. Nuevo pais, nuevo idioma, nuevas costumbres, y finalmente nueva forma de vida desde que encontré la Torah. Muchos cambios los enfrenté de la misma optica que tenia de la vida y por ende algunos aspectos de mi vida se fueron a pique. Hoy por hoy estoy levantando cabeza. Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias Georgina desde Paises Bajos”",
+//     name: "Georgina",
+//   },
+
+//   {
+//     id: 4,
+//     message: "",
+//     complete:
+//       "Muchas gracias Rabi, por su tiempo y los consejos que me ha dado.      Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem.      Gracias por darme su tiempo, y consejo.      Shalom  ",
+//     name: "Eugenia",
+//   },
+//   {
+//     id: 5,
+//     message: " ",
+//     complete: "Rav con respecto a las terapias después de que entendí y asimilé empecé a poner en práctica lo que me dijo y asumí mi parte de la responsabilidad y tomé acción B"H el efecto es inmediato 😅 obviamente ya la parte de la enfermedad se me sale un poco de las manos pero si estoy bien con él es incluso más llevadera, me encantaría que pudieran hablar por favor 🙏🏽",
+//     name: "",
+//   },
+//   {
+//     id: 6,
+//     message: "",
+//     complete: "Yo lo que noté es que la efectividad está en hacer lo que usted nos está aconsejando, si no podemos hablar todo el día con usted pero si no se va a la práctica difícil, el consejo sirve si lo aplicó y efectivamente fue muy rápido el cambio",
+//     name: "",
+//   },
+//   {
+//     id: 7,
+//     message: " ",
+//     complete: "Si muchas gracias, estaré pidiendo a Hashem para que nos supla los recursos para continuar cuanto antes, ya los resultados son buenos y Baruj Hashem lo ha puesto a usted en mi camino para darme luz en medio de esto !",
+//     name: "",
+//   },
+//   {
+//     id: 8,
+//     message: " ",
+//     complete: "Si de verdad que es una buena inversión y necesaria también, yo creo D-os mediante que para la próxima semana podría retomarlo, a mitad de semana le escribiré si se me hace posible el retomarlo para el próximo domingo",
+//     name: "",
+//   },
+//   {
+//     id: 9,
+//     message:
+//       "Muchas gracias Rabino por sus consejos y por la paciencia que tiene usted para guiarnos en estos momentos. ",
+//     complete: "",
+//     name: "",
+//   },
+// ];
 
 const Reviews = [
   {
     id: 1,
     message:
-      "“ (...) ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , (…)“",
+      "“ (...) ESTOY SIN PALABRAS, usted ha dado en el clavo, con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo. Gracias por ayudarme, es usted un gran sabio, que buena luz le acompaña, (…)“",
     complete:
-      "“Con todo respeto me dirijo a usted elogiando su sabiduría, es increíble como después de hablar conmigo pocos minutos  me describe exactamente mi vida y  la de mi pareja , ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , que dios le de salud para que pueda ayudar a mucha gente como lo ha hecho conmigo , mil gracias todha Rava”",
+      "“Con todo respeto me dirijo a usted elogiando su sabiduría, es increíble como después de hablar conmigo pocos minutos me describe exactamente mi vida y la de mi pareja, ESTOY SIN PALABRAS, usted ha dado en el clavo, con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo. Gracias por ayudarme, es usted un gran sabio, que buena luz le acompaña, que dios le de salud para que pueda ayudar a mucha gente como lo ha hecho conmigo, mil gracias todha Rava”",
     name: "",
   },
   {
     id: 2,
     message:
       '" Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
-    complete: "",
+    complete:
+      '      "Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
     name: "Eugenia",
   },
   {
-    id: 2,
+    id: 3,
     message:
       "“(…) Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias. ” ",
     complete:
       "“Rabino Gabriel, gracias por su mensaje y buenos deseos. Quiero aprovechar esta oportunidad para darle las gracias por contactarme y ayudarme con sus buenos consejos y su sabiduria. A lo largo de los últimos años he vivido momentos de cambio en my vida. Nuevo pais, nuevo idioma, nuevas costumbres, y finalmente nueva forma de vida desde que encontré la Torah. Muchos cambios los enfrenté de la misma optica que tenia de la vida y por ende algunos aspectos de mi vida se fueron a pique. Hoy por hoy estoy levantando cabeza. Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias Georgina desde Paises Bajos”",
     name: "Georgina",
+  },
+  {
+    id: 4,
+    message:
+      '" Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
+    complete:
+      '"Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
+    name: "Eugenia",
+  },
+  {
+    id: 5,
+    message:
+      '"Rav, después de que entendí y asimilé, empecé a poner en práctica lo que me dijo. El efecto es inmediato. Gracias."',
+    complete:
+      '"Rav con respecto a las terapias después de que entendí y asimilé empecé a poner en práctica lo que me dijo y asumí mi parte de la responsabilidad y tomé acción B"H el efecto es inmediato 😅 obviamente ya la parte de la enfermedad se me sale un poco de las manos pero si estoy bien con él es incluso más llevadera, me encantaría que pudieran hablar por favor 🙏🏽"',
+    name: "",
+  },
+  {
+    id: 6,
+    message: `"La efectividad está en hacer lo que usted nos aconseja. El cambio fue muy rápido. Gracias."`,
+    complete: `"Yo lo que noté es que la efectividad está en hacer lo que usted nos está aconsejando, si no podemos hablar todo el día con usted pero si no se va a la práctica difícil, el consejo sirve si lo aplicó y efectivamente fue muy rápido el cambio"`,
+    name: "",
+  },
+  {
+    id: 7,
+    message: `"Muchas gracias. Estaré pidiendo a Hashem por recursos para continuar. Los resultados son buenos y Baruj Hashem lo ha puesto a usted en mi camino para darme luz."`,
+    complete: `"Si muchas gracias, estaré pidiendo a Hashem para que nos supla los recursos para continuar cuanto antes, ya los resultados son buenos y Baruj Hashem lo ha puesto a usted en mi camino para darme luz en medio de esto !"`,
+    name: "",
+  },
+  {
+    id: 8,
+    message: `"Es una buena inversión y necesaria. Espero poder retomarlo pronto."`,
+    complete: `"Si de verdad que es una buena inversión y necesaria también, yo creo D-os mediante que para la próxima semana podría retomarlo, a mitad de semana le escribiré si se me hace posible el retomarlo para el próximo domingo"`,
+    name: "",
+  },
+  {
+    id: 9,
+    message: `"Muchas gracias Rabino por sus consejos y por la paciencia que tiene usted para guiarnos en estos momentos."`,
+    complete: `"Muchas gracias Rabino por sus consejos y por la paciencia que tiene usted para guiarnos en estos momentos."`,
+    name: "",
   },
 ];
 export default function Home() {
