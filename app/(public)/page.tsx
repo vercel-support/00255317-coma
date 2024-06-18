@@ -409,12 +409,12 @@ export default function Home() {
                     ¿Cuánto cuesta el servicio?
                   </AccordionTrigger>
                   <AccordionContent>
-                    El costo de una sesión de asesoría es de 250€. Este precio
-                    incluye una hora de asesoría personalizada con uno de
-                    nuestros expertos en relaciones de pareja. Además, al
-                    reservar tu sesión, estarás contribuyendo al desarrollo
-                    continuo de nuestro servicio para seguir ofreciendo el mejor
-                    apoyo posible.
+                    El costo de una sesión de asesoría es de $250 (dolares
+                    americanos). Este precio incluye una hora de asesoría
+                    personalizada con uno de nuestros expertos en relaciones de
+                    pareja. Además, al reservar tu sesión, estarás contribuyendo
+                    al desarrollo continuo de nuestro servicio para seguir
+                    ofreciendo el mejor apoyo posible.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
