@@ -14,7 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Crown } from "lucide-react";
+import { Crown, CrownIcon } from "lucide-react";
 import Image from "next/image";
 import {
   FaChartLine,
@@ -163,7 +163,7 @@ export default function Home() {
       >
         {/* columna 1 */}
         <div className="w-full flex flex-col items-center">
-          <h1 className="text-5xl text-white text-center leading-relaxed mb-4">
+          <h1 className="text-5xl text-white text-center md:leading-relaxed mb-4">
             Despierta a un nuevo amanecer en tu relación con la
             <br />
             <span className="text-brandingSecond rounded-md p-2 font-extrabold ">
@@ -192,6 +192,50 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Crown
+            className="w-full h-full text-brandingThird opacity-15"
+            style={{ width: "500px", height: "500px" }}
+          />
+        </div>
+        <div className="w-full  flex flex-col items-center justify-center p-6 gap-4">
+          <span className="w-full flex items-center gap-2 ">
+            <div className="bg-white border-2 border-branding h-12 min-w-12 rounded-lg flex items-center justify-center">
+              <Image
+                src={"/ISOTIPO_75PX.svg"}
+                width={25}
+                height={25}
+                alt="isotipo"
+              />
+            </div>
+            <h2 className="text-left text-3xl uppercase text-branding dark:text-white">
+              C.O.M.A - Centro de Orientación Matrimonial Asistida
+            </h2>
+          </span>
+          <p className="text-xl font-light text-center">
+            Somos un{" "}
+            <span className="font-bold">Centro Calificado de Exelencia</span>,
+            dirigido a parejas que desean{" "}
+            <span className="font-bold">
+              mejorar su relación de forma garantizada
+            </span>
+            .
+          </p>
+          <p className="text-xl font-light text-center">
+            Ofrecemos un enfoque integral, de exelencia y personalizado en los
+            servicios de{" "}
+            <span className="font-bold">Asesoramiento Matrimonial</span>. La
+            combinación de la amplia experiencia del{" "}
+            <span className="font-bold">Rabino Gabriel Curdi</span>, los valores
+            fundamentales de
+            <span className="font-bold"> C.O.M.A</span> y los métodos
+            innovadores garantizan resultados efectivos y duraderos para sus
+            pacientes en sus relaciones matrimoniales y de pareja.
+          </p>
         </div>
       </section>
 
@@ -433,6 +477,39 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Crown
+            className="w-full h-full text-brandingThird opacity-15"
+            style={{ width: "500px", height: "500px" }}
+          />
+        </div>
+        <div className="w-full  flex flex-col items-center justify-center p-6 gap-4">
+          <span className="w-full flex items-center gap-2 ">
+            <div className="bg-white border-2 border-branding h-12 min-w-12 rounded-lg flex items-center justify-center">
+              <Image
+                src={"/ISOTIPO_75PX.svg"}
+                width={25}
+                height={25}
+                alt="isotipo"
+              />
+            </div>
+            <h2 className="text-left text-3xl uppercase text-branding dark:text-white">
+              C.O.M.A: Tu Apoyo Matrimonial de Confianza
+            </h2>
+          </span>
+          <p className="text-xl font-light text-center">
+            Como{" "}
+            <span className="font-bold">Centro Calificado de Excelencia</span>,
+            te brindamos confianza, comprensión y profesionalismo. El Rabino
+            Gabriel Curdi, tu asesor principal, es un experto dedicado y
+            comprometido con tu bienestar integral. Su enfoque profesional, pero
+            cálido, crea un ambiente acogedor donde te sentirás seguro para
+            explorar y abordar tus preocupaciones.
+          </p>
+        </div>
+      </section>
+
       {/* seccion 5 */}
 
       <section className="w-full mb-12 px-8 md:px-36 py-36 " id={"5"}>
@@ -574,9 +651,17 @@ export default function Home() {
               <IoCalendarOutline className="text-white h-8 w-8" />
             </div>
             <h2 className="text-3xl text-branding dark:text-white uppercase">
-              ¿Listos para una transformación?
+              ¿Listos para un nuevo amanecer en vuestra relación?
             </h2>
           </span>
+          <p className="text-xl">
+            Reserva tu Asesoría de Pareja. Indica en el campo "Mensaje" si tu
+            pareja está dispuesta a participar en la terapia. La asistencia de
+            ambos es fundamental para la cita. Si tu pareja tiene dudas sobre la
+            terapia, déjanos saber y el Rabino Gabriel Curdi te proporcionará
+            las herramientas necesarias para ayudarle a comprender la
+            importancia de la asesoría.
+          </p>
         </div>
         {/* div 2 */}
         <div className="w-full h-full flex max-md:flex-col items-center md:items-center justify-between  gap-16">

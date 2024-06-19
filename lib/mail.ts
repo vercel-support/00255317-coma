@@ -35,3 +35,12 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     })
     console.log('[EMAIL VERIFICATION 3] -> ', { res });
 }
+
+export const sendConfirmAppointmentEmail = async (email: string, userName: string) => {
+    const res = await resend.emails.send({
+        from: 'comatherapy@digitalleads.es',
+        to: email,
+        subject: 'Confirma tu cita',
+        html: ``
+    })
+}

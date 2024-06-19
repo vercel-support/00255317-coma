@@ -144,8 +144,8 @@ export async function ChangedRole({ id, role }: { id: string, role: UserRole }):
             where: { id },
             data: { role }
         });
-        // si el role es USER y no tiene un empleado asociado, crea uno
-        if (role === UserRole.USER && !user.employeeId) {
+        // si el role es EMPLOYEEy no tiene un empleado asociado, crea uno
+        if (role === UserRole.EMPLOYEE && !user.employeeId) {
             const Newemployee = await db.employee.create({
                 data: {
                     userId: id,

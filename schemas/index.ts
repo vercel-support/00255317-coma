@@ -1,4 +1,4 @@
-import { Appointment, CurrencyType, Employee, LocaleType, SalesMetrics, Service, ServiceTransaction, Settings, SettingsAccount, User, UserRole, NotificationType, Notification } from '@prisma/client';
+import { Appointment, CurrencyType, Employee, LocaleType, SalesMetrics, Service, ServiceTransaction, Settings, SettingsAccount, User, UserRole, NotificationType, Notification, StatusAppointment } from '@prisma/client';
 import * as z from 'zod';
 //IMPORTANT: When you change a schema, you must modify the corresponding model in: @/models/[model_name_here]
 const PlaceholderSettingsAccountSchema: z.Schema<SettingsAccount> = z.lazy(() => SettingsAccountSchema);
@@ -236,7 +236,7 @@ export type TNewService = z.infer<typeof NewServiceSchema>
 export const AppointmentSchema = z.object({
     id: z.string(),
     date: z.date(),
-    status: z.string(),
+    status: z.nativeEnum(StatusAppointment),
     userId: z.string(),
     employeeId: z.string(),
     serviceId: z.string(),
@@ -250,6 +250,16 @@ export const NewAppointmentSchema = AppointmentSchema.omit({
 })
 export type TNewAppointment = z.infer<typeof NewAppointmentSchema>
 
+//** AppointmentForm */
+export const AppoinmentFormSchema = z.object({
+    name: z.string(),
+    coupleName: z.string(),
+    email: z.string(),
+    phone: z.string(),
+    situation: z.string(),
+    message: z.string(),
+})
+export type TAppointmentForm = z.infer<typeof AppoinmentFormSchema>
 //** Employee */
 export const EmployeeSchema = z.object({
     id: z.string(),
@@ -321,7 +331,7 @@ export type TChangePermission = z.infer<typeof ChangePermissionSchema>
 
 export const ChangeRoleSchema = z.object({
     userId: z.string(),
-    role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.CLIENT]),
+    role: z.enum([UserRole.ADMIN, UserRole.EMPLOYEE, UserRole.CLIENT]),
 })
 export type TChangeRole = z.infer<typeof ChangeRoleSchema>
 

@@ -1,6 +1,11 @@
 "use client";
 import { FiAlertTriangle } from "react-icons/fi";
-import { NewAppointmentSchema, TNewAppointment } from "@/schemas";
+import {
+  AppoinmentFormSchema,
+  NewAppointmentSchema,
+  TAppointmentForm,
+  TNewAppointment,
+} from "@/schemas";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -26,43 +31,46 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { newAppoinment } from "@/actions/appoinment";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const AppoinmentForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
+  const user = useCurrentUser();
+  const form = useForm<TAppointmentForm>({
+    resolver: zodResolver(AppoinmentFormSchema),
+    defaultValues: {
+      name: user ? user.name! : undefined,
+      coupleName: undefined,
+      email: user ? user.email! : undefined,
+      phone: undefined,
+      situation: undefined,
+      message: undefined,
+    },
+  });
 
-  const form = useForm();
-  // const form = useForm<TNewAppointment>({
-  //   resolver: zodResolver(NewAppointmentSchema),
-  //   defaultValues: {
-  //     name: initialData.name,
-  //     description: initialData.description,
-  //   },
-  // });
-
-  const onSubmit = () => {};
-  // const onSubmit = (values: TNewCategory) => {
-  //   startTransition(() => {
-  //     updateCategory({
-  //       ...values,
-  //       id: initialData.id,
-  //     })
-  //       .then((data) => {
-  //         if (data.error) {
-  //           setError(data.message);
-  //         }
-  //         if (!data.error) {
-  //           toast.success(data.message);
-  //           router.push(PrivateRoute.CATEGORIES.path);
-  //         }
-  //       })
-  //       .catch(() => {
-  //         setError("Algo salió mal! Inténtalo de nuevo.");
-  //       });
-  //   });
-  // };
+  const onSubmit = (values: TAppointmentForm) => {
+    startTransition(() => {
+      newAppoinment({ values })
+        .then((data) => {
+          if (data.error) {
+            setError(data.message);
+          }
+          if (!data.error) {
+            toast.success(data.message);
+            // router.push(PrivateRoute.CATEGORIES.path);
+          }
+        })
+        .catch(() => {
+          setError("Algo salió mal! Inténtalo de nuevo.");
+        });
+    });
+  };
 
   const situation = [
     {
@@ -91,6 +99,23 @@ const AppoinmentForm = () => {
                     <Input
                       {...field}
                       placeholder="tu nombre"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="coupleName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nombre de la pareja</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Nombre de tu pareja"
                       disabled={isPending}
                     />
                   </FormControl>

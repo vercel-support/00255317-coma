@@ -10,6 +10,10 @@ html, body, :root{
     --branding:hsl(220, 65%, 36%); 
     --branding-second: hsl(342, 67%, 62%); 
     --branding-third: hsl(12, 100%, 65%); 
+/* 
+    --branding:hsla(220, 85%, 69%, 0.979); 
+--branding-second: hsl(342, 73%, 75%); 
+--branding-third: hsl(12, 77%, 66%);  */
 
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(222.2, 84%, 4.9%);
@@ -46,6 +50,10 @@ html, body, :root{
     --branding:hsl(220, 65%, 36%); 
     --branding-second: hsl(342, 67%, 62%); 
     --branding-third: hsl(12, 100%, 65%); 
+
+    /* --branding:hsla(220, 85%, 69%, 0.979); 
+--branding-second: hsl(342, 73%, 75%); 
+--branding-third: hsl(12, 77%, 66%);  */
 
     --background: hsl(222.2, 84%, 4.9%);
     --foreground: hsl(212, 25%, 90%);

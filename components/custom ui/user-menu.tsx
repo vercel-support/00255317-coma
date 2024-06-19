@@ -42,7 +42,7 @@ export const UserMenu = () => {
             )}
           >
             {user?.role === UserRole.ADMIN && "Admin"}
-            {user?.role === UserRole.USER && "Empleado"}
+            {user?.role === UserRole.EMPLOYEE && "Empleado"}
             {user?.role === UserRole.CLIENT && "Cliente"}
           </p>
         </DropdownMenuLabel>

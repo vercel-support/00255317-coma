@@ -7,9 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum StatusAppointment {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELED
+}
+
 enum UserRole {
-  USER
   ADMIN
+  EMPLOYEE
   CLIENT
 }
 
@@ -204,15 +211,15 @@ model Service {
 }
 
 model Appointment {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String            @id @default(auto()) @map("_id") @db.ObjectId
   date       DateTime
-  status     String
-  userId     String   @db.ObjectId
-  employeeId String   @db.ObjectId
-  serviceId  String   @db.ObjectId
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  employee   Employee @relation("EmployeeToAppointment", fields: [employeeId], references: [id], onDelete: Cascade)
-  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  status     StatusAppointment @default(PENDING)
+  userId     String            @db.ObjectId
+  employeeId String            @db.ObjectId
+  serviceId  String            @db.ObjectId
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employee   Employee          @relation("EmployeeToAppointment", fields: [employeeId], references: [id], onDelete: Cascade)
+  service    Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
   @@index([userId], name: "idx_user_id")
   @@index([employeeId], name: "idx_employee_id")
