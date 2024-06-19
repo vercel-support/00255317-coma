@@ -271,7 +271,7 @@ export async function createUsersTest(): Promise<void> {
                 password: '123456',
                 permission: true,
                 emailVerified: new Date(),
-                role: UserRole.USER,
+                role: UserRole.EMPLOYEE,
             },
             {
                 name: 'cliente 1',
@@ -304,7 +304,7 @@ export async function createUsersTest(): Promise<void> {
         const allUsers = await db.user.findMany();
 
         for (const user of allUsers) {
-            if (user.role === UserRole.ADMIN || user.role === UserRole.USER) {
+            if (user.role === UserRole.ADMIN || user.role === UserRole.EMPLOYEE) {
                 const Newemployee = await db.employee.create({
                     data: {
                         userId: user.id,

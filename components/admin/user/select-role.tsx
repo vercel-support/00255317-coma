@@ -35,7 +35,7 @@ export const SelectRole = ({
   const router = useRouter();
   const roles = [
     { id: UserRole.ADMIN, name: "Administrador" },
-    { id: UserRole.USER, name: "Empleado" },
+    { id: UserRole.EMPLOYEE, name: "Empleado" },
     { id: UserRole.CLIENT, name: "Cliente" },
   ];
 
