@@ -9,6 +9,11 @@ import { PrivateRoute, PublicRoute } from "./lib/routes"
 export const publicRoutes: string[] = [
     PublicRoute.HOME.href,
     PublicRoute.CONFIRM.href,
+    PublicRoute.POLICY.href,
+    PublicRoute.TERMS.href,
+    PublicRoute.COOKIES.href,
+    PublicRoute.US.href,
+    PublicRoute.CONTACT.href,
 ]
 
 
