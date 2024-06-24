@@ -24,7 +24,7 @@ export const UserSchema = z.object({
     province: z.string(),
     country: z.string(),
     postalCode: z.string(),
-    emailVerified: z.date(),
+    emailVerified: z.date().nullable(),
     image: z.string().nullable(),
     permission: z.boolean(),
     role: z.nativeEnum(UserRole),
@@ -215,7 +215,7 @@ export const ServiceSchema = z.object({
     name: z.string(),
     description: z.string(),
     price: z.coerce.number().min(0.01, "El precio es requerido"),
-    priceIdStripe: z.string(),
+    priceIdStripe: z.string().nullable(),
     currencyType: z.nativeEnum(CurrencyType),
     localeType: z.nativeEnum(LocaleType),
     duration: z.coerce.number().min(1, "El tiempo en minutos es requerido."),
@@ -235,14 +235,19 @@ export type TNewService = z.infer<typeof NewServiceSchema>
 //** Appointment */
 export const AppointmentSchema = z.object({
     id: z.string(),
-    date: z.date(),
+    bookingDate: z.date(),
+    appointmentDate: z.date().nullable(),
     status: z.nativeEnum(StatusAppointment),
+    coupleName: z.string().nullable(),
+    situation: z.string(),
+    message: z.string().nullable(),
+    linkMeet: z.string().nullable(),
     userId: z.string(),
     employeeId: z.string(),
     serviceId: z.string(),
-    user: UserSchema.optional(), // Este campo es opcional ya que en el modelo Prisma no es obligatorio para la relación
-    employee: PlaceholderEmployeeSchema.optional(), // Igual que arriba
-    service: ServiceSchema.optional() // Igual que arriba
+    user: UserSchema.optional(),
+    employee: PlaceholderEmployeeSchema.optional(),
+    service: ServiceSchema.optional()
 })
 export type TAppointment = z.infer<typeof AppointmentSchema>
 export const NewAppointmentSchema = AppointmentSchema.omit({
@@ -253,11 +258,13 @@ export type TNewAppointment = z.infer<typeof NewAppointmentSchema>
 //** AppointmentForm */
 export const AppoinmentFormSchema = z.object({
     name: z.string(),
-    coupleName: z.string(),
+    coupleName: z.string().nullable(),
     email: z.string(),
     phone: z.string(),
     situation: z.string(),
     message: z.string(),
+    employeeId: z.string(),
+    serviceId: z.string()
 })
 export type TAppointmentForm = z.infer<typeof AppoinmentFormSchema>
 //** Employee */

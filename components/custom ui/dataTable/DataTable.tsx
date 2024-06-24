@@ -16,14 +16,23 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getPaginationRowModel,
+  getSortedRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  SortingState,
+  VisibilityState,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
-
-interface DataTableProps<TData, TValue> {
+import { Skeleton } from "@/components/ui/skeleton";
+import { DataTableToolbar, filters } from "./data-table-toolbar";
+import React from "react";
+export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchKey: string;
+  filters?: filters[];
   selectRow?: boolean;
 }
 
@@ -31,34 +40,47 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   searchKey,
-  selectRow = true,
+  filters,
+  selectRow = false,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
       columnFilters,
     },
   });
 
   return (
-    <div className="py-5">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Buscar..."
-          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(searchKey)?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-      </div>
-      <div className="rounded-md border">
+    <div className="w-full space-y-4 bg-card p-4 rounded-lg pb-10">
+      <DataTableToolbar table={table} searchKey={searchKey} filters={filters} />
+      <div
+        className="rounded-md border border-brandingDark
+      dark:border-brandingLight
+      "
+      >
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -101,14 +123,18 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No hay resultados
+                  No hay resultados.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} selectRow={selectRow} />
     </div>
   );
 }
+
+export const LoaderDataTable = () => {
+  return <Skeleton className="w-full h-80 " />;
+};

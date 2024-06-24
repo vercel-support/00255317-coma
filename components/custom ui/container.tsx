@@ -18,7 +18,7 @@ const Container: React.FC<ContainerInterface> = ({
   return (
     <div
       className={cn(
-        "max-w-[2520px]  xl:px-20 md:px-10 sm:px-2 px-4 space-y-4",
+        "max-w-[2520px]  xl:px-20 md:px-10 sm:px-2 px-4 space-y-4 pt-10",
         bg ? "bg-neutral-200 dark:bg-slate-800" : "", // Aplicar clase de fondo si bg es true
         className
       )}

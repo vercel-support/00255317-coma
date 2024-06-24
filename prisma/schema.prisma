@@ -10,6 +10,7 @@ datasource db {
 enum StatusAppointment {
   PENDING
   CONFIRMED
+  PAID
   COMPLETED
   CANCELED
 }
@@ -63,7 +64,7 @@ model User {
   province              String
   country               String
   postalCode            String
-  emailVerified         DateTime               @default(now())
+  emailVerified         DateTime?
   permission            Boolean                @default(false)
   image                 String?
   role                  UserRole               @default(CLIENT)
@@ -198,7 +199,7 @@ model Service {
   name                 String
   description          String
   price                Float
-  priceIdStripe        String
+  priceIdStripe        String?
   currencyType         CurrencyType         @default(USD)
   localeType           LocaleType           @default(en_US)
   duration             Int // Duration in minutes
@@ -211,15 +212,20 @@ model Service {
 }
 
 model Appointment {
-  id         String            @id @default(auto()) @map("_id") @db.ObjectId
-  date       DateTime
-  status     StatusAppointment @default(PENDING)
-  userId     String            @db.ObjectId
-  employeeId String            @db.ObjectId
-  serviceId  String            @db.ObjectId
-  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  employee   Employee          @relation("EmployeeToAppointment", fields: [employeeId], references: [id], onDelete: Cascade)
-  service    Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  bookingDate     DateTime          @default(now())
+  appointmentDate DateTime?
+  status          StatusAppointment @default(PENDING)
+  coupleName      String?
+  situation       String
+  message         String?
+  linkMeet        String?
+  userId          String            @db.ObjectId
+  employeeId      String            @db.ObjectId
+  serviceId       String            @db.ObjectId
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employee        Employee          @relation("EmployeeToAppointment", fields: [employeeId], references: [id], onDelete: Cascade)
+  service         Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
   @@index([userId], name: "idx_user_id")
   @@index([employeeId], name: "idx_employee_id")

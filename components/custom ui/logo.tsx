@@ -54,7 +54,7 @@ export const Logo = ({ tagline = false, size = "small" }: LogoProps) => {
   return (
     <Link
       href={PublicRoute.HOME.href}
-      className="h-full flex items-center justify-center"
+      className="flex items-center justify-center"
     >
       <Image src={url} alt="COMA" width={sizeValue} height={sizeValue} />
     </Link>

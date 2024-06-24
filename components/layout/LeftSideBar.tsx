@@ -13,7 +13,7 @@ const LeftSideBar = () => {
 
   return (
     <aside className="min-w-[250px] h-screen left-0 top-0 sticky p-8 pt-2 flex flex-col gap-4 bg-card shadow-lg max-md:hidden overflow-auto">
-      <div className="w-full flex items-center justify-center  rounded-md shadow-sm p-2">
+      <div className="w-full flex items-center justify-center  p-2">
         <Logo />
       </div>
       <div className="w-full flex flex-col h-full justify-between">

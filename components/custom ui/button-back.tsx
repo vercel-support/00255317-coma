@@ -13,7 +13,7 @@ export function ButtonBack({ children, className }: Props) {
 
   return (
     <Button
-      variant={"ghost"}
+      variant={"icon"}
       className={className}
       onClick={() => router.back()}
     >

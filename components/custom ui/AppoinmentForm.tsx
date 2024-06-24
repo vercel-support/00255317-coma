@@ -33,14 +33,13 @@ import {
 import { Textarea } from "../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { newAppoinment } from "@/actions/appoinment";
+import { newPetitionAppoinment } from "@/actions/appoinment";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
-const AppoinmentForm = () => {
+const AppoinmentForm = ({ serviceId }: { serviceId: string }) => {
   const [error, setError] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const [open, setOpen] = useState<boolean>(false);
   const user = useCurrentUser();
   const form = useForm<TAppointmentForm>({
     resolver: zodResolver(AppoinmentFormSchema),
@@ -51,12 +50,14 @@ const AppoinmentForm = () => {
       phone: undefined,
       situation: undefined,
       message: undefined,
+      serviceId,
+      employeeId: "66741992ff29abc95f8de5c6",
     },
   });
 
   const onSubmit = (values: TAppointmentForm) => {
     startTransition(() => {
-      newAppoinment({ values })
+      newPetitionAppoinment({ values })
         .then((data) => {
           if (data.error) {
             setError(data.message);
@@ -117,6 +118,7 @@ const AppoinmentForm = () => {
                       {...field}
                       placeholder="Nombre de tu pareja"
                       disabled={isPending}
+                      value={field.value ?? ""}
                     />
                   </FormControl>
                   <FormMessage />

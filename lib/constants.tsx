@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { PrivateRoute, PublicRoute } from "./routes";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 export const MenuItemsAdmin = [
   {
@@ -21,13 +22,19 @@ export const MenuItemsAdmin = [
     href: PrivateRoute.DASHBOARD.href,
     icon: <LayoutDashboard className="w-6 h-6" />,
   },
-
   {
-    title: PrivateRoute.CONSULTINGS.title,
-    name: PrivateRoute.CONSULTINGS.title,
-    path: PrivateRoute.CONSULTINGS.path,
-    href: PrivateRoute.CONSULTINGS.href,
+    title: PrivateRoute.SERVICES.title,
+    name: PrivateRoute.SERVICES.title,
+    path: PrivateRoute.SERVICES.path,
+    href: PrivateRoute.SERVICES.href,
     icon: <ShoppingBasket className="w-6 h-6" />,
+  },
+  {
+    title: PrivateRoute.APPOINTMENTS.title,
+    name: PrivateRoute.APPOINTMENTS.title,
+    path: PrivateRoute.APPOINTMENTS.path,
+    href: PrivateRoute.APPOINTMENTS.href,
+    icon: <FaRegCalendarAlt className="w-6 h-6" />,
   },
   {
     title: PrivateRoute.CASH_MANAGEMENT.title,

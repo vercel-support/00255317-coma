@@ -19,11 +19,11 @@ const TopBar = () => {
   const pathname = usePathname();
   return (
     <div className="sticky top-0 z-20 w-full flex justify-between px-8 py-2 items-center bg-card shadow-xl md:hidden">
-      <div className="w-[50%] flex items-center justify-center bg-branding rounded-md shadow-sm">
+      <div className="w-[50%] flex items-center justify-center p-2">
         <Logo />
       </div>
       <div className="relative flex gap-4 items-center">
-        <ModeToggle />
+        <ModeToggle textColor={"text-branding"} />
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Menu className="cursor-pointer md:hidden text-primary" />

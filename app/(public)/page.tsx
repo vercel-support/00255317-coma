@@ -14,8 +14,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { getAllServices } from "@/data/services.data";
+import { TService } from "@/schemas";
 import { Crown, CrownIcon } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   FaChartLine,
   FaComment,
@@ -28,71 +31,6 @@ import {
 import { GiScreaming } from "react-icons/gi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { MdCommentBank } from "react-icons/md";
-
-// const Reviews = [
-//   {
-//     id: 1,
-//     message:
-//       "“ (...) ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , (…)“",
-//     complete:
-//       "“Con todo respeto me dirijo a usted elogiando su sabiduría, es increíble como después de hablar conmigo pocos minutos  me describe exactamente mi vida y  la de mi pareja , ESTOY SIN PALABRAS  , usted ha dado en el clavo , con la situación que estoy viviendo, Bendita sea la madre que lo trajo a este mundo . Gracias por ayudarme , es usted un gran sabio , que buena luz le acompaña , que dios le de salud para que pueda ayudar a mucha gente como lo ha hecho conmigo , mil gracias todha Rava”",
-//     name: "",
-//   },
-//   {
-//     id: 2,
-//     message:
-//       '" Muchas gracias Rabi, por su tiempo y los consejos que me ha dado. Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem. Gracias por darme su tiempo, y consejo. Shalom"',
-//     complete: "",
-//     name: "Eugenia",
-//   },
-//   {
-//     id: 3,
-//     message:
-//       "“(…) Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias. ” ",
-//     complete:
-//       "“Rabino Gabriel, gracias por su mensaje y buenos deseos. Quiero aprovechar esta oportunidad para darle las gracias por contactarme y ayudarme con sus buenos consejos y su sabiduria. A lo largo de los últimos años he vivido momentos de cambio en my vida. Nuevo pais, nuevo idioma, nuevas costumbres, y finalmente nueva forma de vida desde que encontré la Torah. Muchos cambios los enfrenté de la misma optica que tenia de la vida y por ende algunos aspectos de mi vida se fueron a pique. Hoy por hoy estoy levantando cabeza. Muchas gracias al Rabino Gabriel que me ha escuchado y me guiado para retomar las riendas de mi vida y traer shalom a mi hogar, a mi matrimonio y a mi vida. Gracias Georgina desde Paises Bajos”",
-//     name: "Georgina",
-//   },
-
-//   {
-//     id: 4,
-//     message: "",
-//     complete:
-//       "Muchas gracias Rabi, por su tiempo y los consejos que me ha dado.      Voy a abrirme a la posibilidad de conocer a alguien respetuoso, bezra Hashem.      Gracias por darme su tiempo, y consejo.      Shalom  ",
-//     name: "Eugenia",
-//   },
-//   {
-//     id: 5,
-//     message: " ",
-//     complete: "Rav con respecto a las terapias después de que entendí y asimilé empecé a poner en práctica lo que me dijo y asumí mi parte de la responsabilidad y tomé acción B"H el efecto es inmediato 😅 obviamente ya la parte de la enfermedad se me sale un poco de las manos pero si estoy bien con él es incluso más llevadera, me encantaría que pudieran hablar por favor 🙏🏽",
-//     name: "",
-//   },
-//   {
-//     id: 6,
-//     message: "",
-//     complete: "Yo lo que noté es que la efectividad está en hacer lo que usted nos está aconsejando, si no podemos hablar todo el día con usted pero si no se va a la práctica difícil, el consejo sirve si lo aplicó y efectivamente fue muy rápido el cambio",
-//     name: "",
-//   },
-//   {
-//     id: 7,
-//     message: " ",
-//     complete: "Si muchas gracias, estaré pidiendo a Hashem para que nos supla los recursos para continuar cuanto antes, ya los resultados son buenos y Baruj Hashem lo ha puesto a usted en mi camino para darme luz en medio de esto !",
-//     name: "",
-//   },
-//   {
-//     id: 8,
-//     message: " ",
-//     complete: "Si de verdad que es una buena inversión y necesaria también, yo creo D-os mediante que para la próxima semana podría retomarlo, a mitad de semana le escribiré si se me hace posible el retomarlo para el próximo domingo",
-//     name: "",
-//   },
-//   {
-//     id: 9,
-//     message:
-//       "Muchas gracias Rabino por sus consejos y por la paciencia que tiene usted para guiarnos en estos momentos. ",
-//     complete: "",
-//     name: "",
-//   },
-// ];
 
 const Reviews = [
   {
@@ -154,8 +92,14 @@ const Reviews = [
   },
 ];
 export default function Home() {
+  const handleToSectionClick = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
-    <main className="flex  flex-col items-center justify-center ">
+    <main className="flex w-full flex-col items-center justify-center ">
       {/* HERO */}
       <section
         id={"hero"}
@@ -174,7 +118,12 @@ export default function Home() {
             Mejora la comunicación, resuelve conflictos y recupera la chispa en
             tu relación, en nuestro Centro Calificado de Exelencia.
           </p>
-          {/* <Button variant={"secondary"}>Reserva tu Asesoría ahora</Button> */}
+          <Button
+            variant={"secondary"}
+            onClick={() => handleToSectionClick("8")}
+          >
+            Reserva tu Asesoría ahora
+          </Button>
         </div>
 
         {/* columna 2 */}
@@ -195,7 +144,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8">
+      <section
+        className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8"
+        id="1"
+      >
         <div className="absolute inset-0 flex items-center justify-center">
           <Crown
             className="w-full h-full text-brandingThird opacity-15"
@@ -258,7 +210,7 @@ export default function Home() {
               Lo que Nos Hace Únicos
             </h2>
           </span>
-          <p>
+          <p className="text-xl">
             En C.O.M.A, ofrecemos terapias personalizadas de alta calidad para
             aquellos que buscan un bienestar integral en su relación matrimonial
             o de pareja. El Rabino Gabriel Curdi se dedica a proporcionar
@@ -413,7 +365,10 @@ export default function Home() {
           <p>La duración de la asesoría online es de 60 minutos</p>
           <h3 className="text-4xl font-extrabold text-brandingSecond">$ 250</h3>
 
-          <Button className="bg-brandingSecond text-white">
+          <Button
+            className="bg-brandingSecond text-white"
+            onClick={() => handleToSectionClick("8")}
+          >
             Pide tu Asesoría
           </Button>
         </div>
@@ -477,7 +432,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8">
+      <section
+        className="relative w-full h-full mb-12 px-20 md:px-36 flex flex-col items-center justify-center py-16 gap-8"
+        id="6"
+      >
         <div className="absolute inset-0 flex items-center justify-center">
           <Crown
             className="w-full h-full text-brandingThird opacity-15"
@@ -512,7 +470,7 @@ export default function Home() {
 
       {/* seccion 5 */}
 
-      <section className="w-full mb-12 px-8 md:px-36 py-36 " id={"5"}>
+      <section className="w-full mb-12 px-8 md:px-36 py-36 " id={"7"}>
         <div className="w-full h-full flex max-md:flex-col items-center md:items-start justify-between  gap-16">
           <div className="relative min-w-[300px] h-[300px] bg-branding  rounded-t-full border-8 border-brandingSecond overflow-visible shadow-2xl">
             <div className="absolute -top-[36px] -left-[19px] w-[750px] h-[750px]">
@@ -643,7 +601,7 @@ export default function Home() {
       </section>
 
       {/* seccion 6 */}
-      <section className="w-full  mb-12 px-8 md:px-36 py-36" id={"3"}>
+      <section className="w-full  mb-12 px-8 md:px-36 py-36" id={"8"}>
         {/* div 1 */}
         <div className="w-full h-full flex flex-col items-center md:items-start gap-2 mb-4">
           <span className="flex items-center justify-center gap-2">
@@ -667,7 +625,7 @@ export default function Home() {
         <div className="w-full h-full flex max-md:flex-col items-center md:items-center justify-between  gap-16">
           <div className="order-2 md:order-1 w-full h-full flex flex-col items-center justify-center">
             <div className="w-full flex items-center">
-              <AppoinmentForm />
+              <AppoinmentForm serviceId={"66759b49b6d9def32e1619b9"} />
             </div>
           </div>
 

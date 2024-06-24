@@ -31,7 +31,7 @@ export const login = async (
     if (!existingUser.emailVerified) {
         const verificationToken = await generateVerificationToken(existingUser.email);
 
-        await sendVerificationEmail(verificationToken.email, verificationToken.token);
+        await sendVerificationEmail(verificationToken.email, verificationToken.token, existingUser.name);
         return { success: "Correo de verificación enviado" }
 
     }

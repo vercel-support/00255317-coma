@@ -47,7 +47,7 @@ export const updateUser = async (values: TSettingsUser): Promise<ResServer> => {
             if (existingUser && existingUser.id !== user.id) throw new CustomError('Email ya en uso', 400)
 
             const verificationToken = await generateVerificationToken(values.email)
-            await sendVerificationEmail(verificationToken.email, verificationToken.token)
+            await sendVerificationEmail(verificationToken.email, verificationToken.token, existingUser?.name!)
 
             return {
                 error: false,

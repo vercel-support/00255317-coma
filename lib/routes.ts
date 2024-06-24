@@ -4,17 +4,26 @@ export const PrivateRoute: { [key: string]: TRoute } = {
         path: "/dashboard",
         href: "/dashboard",
     },
-    CONSULTINGS: {
-        title: "Asesorias",
-        path: "/consultings",
-        href: "/consultings",
+    APPOINTMENTS: {
+        title: "Citas",
+        path: "/appointments",
+        href: "/appointments",
     },
-    CONSULTING: {
-        title: "Asesoria",
-        path: "/consultings/:consultingId",
-        href: "/consultings/",
+    APPOINTMENT: {
+        title: "Cita",
+        path: "/appointments/:appointmentId",
+        href: "/appointments/",
     },
-
+    SERVICES: {
+        title: "Servicios",
+        path: "/services",
+        href: "/services",
+    },
+    SERVICE: {
+        title: "Servicio",
+        path: "/services/:serviceId",
+        href: "/services/",
+    },
     STATISTICS: {
         title: "Estadísticas",
         path: "/statistics",
