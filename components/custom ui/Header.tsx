@@ -44,7 +44,7 @@ const Header = () => {
         width={150}
         height={150}
       />
-      <MenuHeader />
+      {/* <MenuHeader /> */}
       <div className="flex items-center justify-end gap-2">
         <ModeToggle />
         {!user ? (
