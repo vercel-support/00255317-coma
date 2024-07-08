@@ -58,7 +58,7 @@ model User {
   password              String
   name                  String
   lastName              String
-  phone                 String
+  phone                 String                 @unique
   address               String
   city                  String
   province              String
@@ -215,6 +215,7 @@ model Appointment {
   id              String            @id @default(auto()) @map("_id") @db.ObjectId
   bookingDate     DateTime          @default(now())
   appointmentDate DateTime?
+  appointmentTime String?
   status          StatusAppointment @default(PENDING)
   coupleName      String?
   situation       String

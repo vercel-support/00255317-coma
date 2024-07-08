@@ -24,12 +24,12 @@ export const columns: ColumnDef<CAppointment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "bookingDate",
+    accessorKey: "appointmentDate",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Fecha" />
+      <DataTableColumnHeader column={column} title="Fecha cita" />
     ),
     cell: ({ row }) =>
-      row.original.bookingDate.toLocaleString("es-ES", {
+      row.original.appointmentDate?.toLocaleString("es-ES", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -65,7 +65,21 @@ export const columns: ColumnDef<CAppointment>[] = [
     enableSorting: true,
     enableHiding: false,
   },
+  {
+    accessorKey: "bookingDate",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Fecha petición" />
+    ),
+    cell: ({ row }) =>
+      row.original.bookingDate.toLocaleString("es-ES", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }),
 
+    enableSorting: true,
+    enableHiding: false,
+  },
   {
     id: "actions",
     cell: ({ row }) => <CellAction data={row.original} />,

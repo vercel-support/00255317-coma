@@ -3,7 +3,7 @@
 import { CustomError } from "@/lib/custom-error.class";
 import { db } from "@/lib/db";
 import { ResServer } from "@/lib/interfaces";
-import { sendConfirmAppointmentEmail, sendTherapistAppointmentEmail, sendVerificationEmail, sendVerificationEmailWhitAppointment } from "@/lib/mail";
+import { sendCancelAppointmentEmail, sendConfirmAppointmentEmail, sendConfirmedAppointmentEmail, sendTherapistAppointmentEmail, sendVerificationEmail, sendVerificationEmailWhitAppointment } from "@/lib/mail";
 import { PrivateRoute } from "@/lib/routes";
 import { generateVerificationToken } from "@/lib/tokens";
 import { AppoinmentFormSchema, AppointmentSchema, TAppointment, TAppointmentForm, TUser } from "@/schemas";
@@ -162,6 +162,7 @@ export async function editAppointment({ values }: { values: TAppointment }): Pro
             id,
             bookingDate,
             appointmentDate,
+            appointmentTime,
             status,
             coupleName,
             situation,
@@ -171,11 +172,33 @@ export async function editAppointment({ values }: { values: TAppointment }): Pro
             serviceId,
             linkMeet
         } = AppointmentSchema.parse(values)
-        // guardar los nuevos datos de la cita
-        // si la cita es canceled entonces encia un email al paciente para avisarle que ha sido cancelada la cita y darle un enlace para poder reclamar
-        // si la cita en pendiente no hace nada
-        // si la cita es confirmada, crea un enlace de pago del valor del servicio, crea tambien un enlace de googlemeets que gaurdara en db y envia un email al paciente con la fecha los datos de la cita y el enlace de pago
+        const user = await db.user.findFirst({
+            where: {
+                id: userId
+            }
+        })
+        if (!user) throw new CustomError('Ha ocurrido un error con el id del usuario.', 400)
+        // Si la cita es cancelada, enviar un email al paciente
+        if (status === StatusAppointment.CANCELED) {
+            await sendCancelAppointmentEmail(user?.email!, user?.name!)
+        }
 
+        // Si la cita es confirmada, crear enlace de pago 
+        if (status === StatusAppointment.CONFIRMED) {
+            const paymentLink = await generatePaymentLink(serviceId);
+            const appointmentDateFormat = appointmentDate?.toLocaleDateString('es-ES')
+            await sendConfirmedAppointmentEmail(user?.email, user.name, appointmentDateFormat!, appointmentTime!, paymentLink, linkMeet!)
+        }
+
+        await db.appointment.update({
+            where: { id },
+            data: {
+                appointmentDate,
+                appointmentTime,
+                linkMeet,
+                status
+            },
+        });
         revalidatePath(PrivateRoute.APPOINTMENTS.path)
         return {
             error: false,
@@ -214,3 +237,5 @@ export async function editAppointment({ values }: { values: TAppointment }): Pro
         }
     }
 }
+
+async function generatePaymentLink(serviceId: string) { return '' }

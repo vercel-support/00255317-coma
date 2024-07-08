@@ -20,6 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -58,6 +59,7 @@ const AppointmentAgreeForm = ({
       id: initialData && initialData.id,
       bookingDate: initialData && initialData.bookingDate,
       appointmentDate: initialData ? initialData.appointmentDate : undefined,
+      appointmentTime: initialData ? initialData.appointmentTime : undefined,
       status: initialData && initialData.status,
       coupleName: initialData && initialData.coupleName,
       situation: initialData && initialData.situation,
@@ -188,6 +190,49 @@ const AppointmentAgreeForm = ({
                       Escoge una fecha para agendar la asesoría para el
                       pacientes.
                     </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="appointmentTime"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel className="font-bold">
+                      Hora de la Asesoría
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="time"
+                        className="w-[240px] pl-3 text-left font-normal"
+                        {...field}
+                        value={field.value ?? ""}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Escoge una hora para agendar la asesoría para el paciente.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="linkMeet"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel className="font-bold">
+                      Enlace Google Meets
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="w-[240px] pl-3 text-left font-normal"
+                        {...field}
+                        value={field.value ?? ""}
+                      />
+                    </FormControl>
+
                     <FormMessage />
                   </FormItem>
                 )}

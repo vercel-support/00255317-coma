@@ -17,7 +17,7 @@ const LeftSideBar = () => {
         <Logo />
       </div>
       <div className="w-full flex flex-col h-full justify-between">
-        <div className="flex h-[80%] flex-col justify-between mb-3">
+        <div className="flex h-[80%] flex-col justify-start gap-12 mt-8 mb-3">
           {MenuItemsAdmin.map((link) => (
             <Link
               key={link.name}

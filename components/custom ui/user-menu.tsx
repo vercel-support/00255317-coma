@@ -49,10 +49,10 @@ export const UserMenu = () => {
         <Separator />
         {user?.role === UserRole.ADMIN && (
           <DropdownMenuItem>
-            <Link href={PrivateRoute.DASHBOARD.href}>
+            <Link href={PrivateRoute.APPOINTMENTS.href}>
               <DropdownMenuItem className="cursor-pointer">
                 <LayoutDashboard className="w-4 h-4 mr-2" />
-                Dashboard
+                Admin
               </DropdownMenuItem>
             </Link>
           </DropdownMenuItem>

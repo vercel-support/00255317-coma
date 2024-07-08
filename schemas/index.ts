@@ -237,6 +237,7 @@ export const AppointmentSchema = z.object({
     id: z.string(),
     bookingDate: z.date(),
     appointmentDate: z.date().nullable(),
+    appointmentTime: z.string().nullable(),
     status: z.nativeEnum(StatusAppointment),
     coupleName: z.string().nullable(),
     situation: z.string(),

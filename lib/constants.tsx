@@ -15,20 +15,13 @@ import { PrivateRoute, PublicRoute } from "./routes";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 export const MenuItemsAdmin = [
-  {
-    title: PrivateRoute.DASHBOARD.title,
-    name: PrivateRoute.DASHBOARD.title,
-    path: PrivateRoute.DASHBOARD.path,
-    href: PrivateRoute.DASHBOARD.href,
-    icon: <LayoutDashboard className="w-6 h-6" />,
-  },
-  {
-    title: PrivateRoute.SERVICES.title,
-    name: PrivateRoute.SERVICES.title,
-    path: PrivateRoute.SERVICES.path,
-    href: PrivateRoute.SERVICES.href,
-    icon: <ShoppingBasket className="w-6 h-6" />,
-  },
+  // {
+  //   title: PrivateRoute.DASHBOARD.title,
+  //   name: PrivateRoute.DASHBOARD.title,
+  //   path: PrivateRoute.DASHBOARD.path,
+  //   href: PrivateRoute.DASHBOARD.href,
+  //   icon: <LayoutDashboard className="w-6 h-6" />,
+  // },
   {
     title: PrivateRoute.APPOINTMENTS.title,
     name: PrivateRoute.APPOINTMENTS.title,
@@ -37,12 +30,19 @@ export const MenuItemsAdmin = [
     icon: <FaRegCalendarAlt className="w-6 h-6" />,
   },
   {
-    title: PrivateRoute.CASH_MANAGEMENT.title,
-    name: PrivateRoute.CASH_MANAGEMENT.title,
-    path: PrivateRoute.CASH_MANAGEMENT.path,
-    href: PrivateRoute.CASH_MANAGEMENT.href,
-    icon: <BadgeDollarSign className="w-6 h-6" />,
+    title: PrivateRoute.SERVICES.title,
+    name: PrivateRoute.SERVICES.title,
+    path: PrivateRoute.SERVICES.path,
+    href: PrivateRoute.SERVICES.href,
+    icon: <ShoppingBasket className="w-6 h-6" />,
   },
+  // {
+  //   title: PrivateRoute.CASH_MANAGEMENT.title,
+  //   name: PrivateRoute.CASH_MANAGEMENT.title,
+  //   path: PrivateRoute.CASH_MANAGEMENT.path,
+  //   href: PrivateRoute.CASH_MANAGEMENT.href,
+  //   icon: <BadgeDollarSign className="w-6 h-6" />,
+  // },
   {
     title: PrivateRoute.USERS.title,
     name: PrivateRoute.USERS.title,
@@ -51,13 +51,13 @@ export const MenuItemsAdmin = [
     icon: <PiUsersThreeBold className="w-6 h-6" />,
   },
 
-  {
-    title: PrivateRoute.SETTINGS.title,
-    name: PrivateRoute.SETTINGS.title,
-    path: PrivateRoute.SETTINGS.path,
-    href: PrivateRoute.SETTINGS.href,
-    icon: <Settings className="w-6 h-6" />,
-  },
+  // {
+  //   title: PrivateRoute.SETTINGS.title,
+  //   name: PrivateRoute.SETTINGS.title,
+  //   path: PrivateRoute.SETTINGS.path,
+  //   href: PrivateRoute.SETTINGS.href,
+  //   icon: <Settings className="w-6 h-6" />,
+  // },
 ];
 
 export const MenuItems = [

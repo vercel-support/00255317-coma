@@ -9,12 +9,48 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TAppointment } from "@/schemas";
 import AppointmentGestionHeader from "./AppointmentGestionHeader";
 import { columns } from "./columns";
+import { StatusAppointment } from "@prisma/client";
 interface Props {
   appointments: TAppointment[];
   loading: boolean;
 }
+export interface filters {
+  key: string;
+  options: any[];
+  title: string;
+}
 export const AppointmentsClient = ({ appointments, loading }: Props) => {
   console.log("[APPOINTMENT CLIENT] -> ", appointments);
+
+  const statusFormat = [
+    {
+      label: StatusAppointment.CANCELED,
+      value: StatusAppointment.CANCELED,
+    },
+    {
+      label: StatusAppointment.COMPLETED,
+      value: StatusAppointment.COMPLETED,
+    },
+    {
+      label: StatusAppointment.CONFIRMED,
+      value: StatusAppointment.CONFIRMED,
+    },
+    {
+      label: StatusAppointment.PAID,
+      value: StatusAppointment.PAID,
+    },
+    {
+      label: StatusAppointment.PENDING,
+      value: StatusAppointment.PENDING,
+    },
+  ];
+  const filters: filters[] = [
+    {
+      key: "status",
+      options: statusFormat,
+      title: "Estado",
+    },
+  ];
   return (
     <>
       {loading ? (
@@ -31,7 +67,8 @@ export const AppointmentsClient = ({ appointments, loading }: Props) => {
             <DataTable
               columns={columns}
               data={appointments}
-              searchKey={"name"}
+              searchKey={"id"}
+              filters={filters}
             />
           )}
         </FlexContainer>
