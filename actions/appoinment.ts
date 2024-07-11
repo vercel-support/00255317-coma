@@ -56,7 +56,7 @@ export async function newPetitionAppoinment({
     let newUser: TUser | undefined;
     let NewUserPassword: string = '';
     // Si el usuario no existe lo crea
-    if (!true) {
+    if (!false) {
       const password = uuidv4();
       NewUserPassword = password;
       // Encriptar contraseña
