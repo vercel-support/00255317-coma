@@ -101,26 +101,26 @@ export async function newPetitionAppoinment({
     console.log({ therapist });
 
     // crea una cita con status pending
-    const newAppointment = await db.appointment.create({
-      data: {
-        bookingDate: new Date(),
-        status: StatusAppointment.PENDING,
-        coupleName,
-        situation,
-        message,
-        user: {
-          connect: { id: user?.id },
-        },
-        service: { connect: { id: serviceId } },
-        employee: { connect: { id: therapist?.employeeId! } },
-      },
-      include: {
-        service: true,
-        employee: true,
-        user: true,
-      },
-    });
-    console.log({ newAppointment });
+    // const newAppointment = await db.appointment.create({
+    //   data: {
+    //     bookingDate: new Date(),
+    //     status: StatusAppointment.PENDING,
+    //     coupleName,
+    //     situation,
+    //     message,
+    //     user: {
+    //       connect: { id: user?.id },
+    //     },
+    //     service: { connect: { id: '668f9b43cb6a552e6a9f39cf' } },
+    //     employee: { connect: { id: '668f9b43cb6a552e6a9f39cf' } },
+    //   },
+    //   include: {
+    //     service: true,
+    //     employee: true,
+    //     user: true,
+    //   },
+    // });
+    // console.log({ newAppointment });
     // envia email al usaurio con informacion de la cita
     // si es usuario ya registrado solo info cita
     if (userExist) {
@@ -150,7 +150,7 @@ export async function newPetitionAppoinment({
       coupleName: coupleName || '',
       situation,
       message,
-      service: newAppointment.service.name,
+      service: ''//newAppointment.service.name,
     });
     console.log(3,'email enviado');
     // TODO: socket para appointments y socket para notification
