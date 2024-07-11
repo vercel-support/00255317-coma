@@ -48,15 +48,15 @@ export async function newPetitionAppoinment({
     console.log({ values });
 
     // Buscar en db el email del usaurio
-    // const userExist = await db.user.findUnique({
-    //   where: { email },
-    // });
-    // console.log({ userExist });
+    const userExist = await db.user.findUnique({
+      where: { email },
+    });
+    console.log({ userExist });
 
     let newUser: TUser | undefined;
     let NewUserPassword: string = '';
     // Si el usuario no existe lo crea
-    if (!false) {
+    if (!userExist) {
       const password = uuidv4();
       NewUserPassword = password;
       // Encriptar contraseña
@@ -88,7 +88,7 @@ export async function newPetitionAppoinment({
       if (!newUser) throw new CustomError('Ha ocurrido un error', 400);
     }
 
-    const user = newUser/*  ? newUser : userExist */;
+    const user = newUser ? newUser : userExist;
 
     console.log({ user });
 
@@ -123,10 +123,10 @@ export async function newPetitionAppoinment({
     console.log({ newAppointment });
     // envia email al usaurio con informacion de la cita
     // si es usuario ya registrado solo info cita
-    // if (userExist) {
-    //   await sendConfirmAppointmentEmail(email, user?.name!);
-    //   console.log(1,'email enviado');
-    // }
+    if (userExist) {
+      await sendConfirmAppointmentEmail(email, user?.name!);
+      console.log(1,'email enviado');
+    }
     // si es usuario nuevo un tipo de email con su password
     if (newUser) {
       const verificationToken = await generateVerificationToken(email!);
